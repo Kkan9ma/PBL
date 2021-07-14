@@ -1,4 +1,5 @@
 import * as math from "./math.js";
+import style from "./style.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector("#btn");
