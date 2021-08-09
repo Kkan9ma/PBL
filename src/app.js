@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', main);
 const $ = (selector, scope = document) => scope.querySelector(selector);
+const $$ = (selector, scope = document) => scope.querySelectorAll(selector);
+const on = (target, eventName, handler) => target.addEventListener(eventName, handler);
 
 function returnSpinboxHTMLTemplate() {
   return `
@@ -28,6 +30,29 @@ function returnAddSpinboxButtonTemplate() {
   `;
 }
 
+function onClickAddNumberButton(event) {
+  const {target} = event;
+  const $spinbox = target.closest('.spinbox');
+  const $input = $('input', $spinbox);
+
+  $input.value = parseInt($input.value, 10) + 1;
+}
+
+function onClickSubstractNumberButton(event) {
+  const {target} = event;
+  const $spinbox = target.closest('.spinbox');
+  const $input = $('input', $spinbox);
+
+  $input.value = parseInt($input.value, 10) - 1;
+}
+
+function addEvents() {
+  $$('.spinbox-board').forEach(spinbox => {
+    on($('.add-number-button', spinbox), 'click', onClickAddNumberButton);
+    on($('.substract-number-button', spinbox), 'click', onClickSubstractNumberButton);
+  });
+}
+
 function init() {
   $('#app').innerHTML = returnSpinboxHTMLTemplate();
   $('#app').insertAdjacentHTML('beforeend', returnAddSpinboxButtonTemplate());
@@ -35,4 +60,5 @@ function init() {
 
 function main() {
   init();
+  addEvents();
 }
