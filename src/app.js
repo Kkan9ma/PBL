@@ -1,13 +1,38 @@
-import * as math from "./math.js";
-import style from "./style.css";
+'use strict';
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.querySelector("#btn");
-  const result = document.querySelector("#result");
+document.addEventListener('DOMContentLoaded', main);
+const $ = (selector, scope = document) => scope.querySelector(selector);
 
-  btn.addEventListener("click", () => {
-    result.textContent = math.sum(1, 2);
+function returnSpinboxHTMLTemplate() {
+  return `
+    <div class='spinbox-board'>
+      <div class='spinbox'>
+        <input type='text' value='0' />
+        <button class='add-number-button'>
+          +
+        </button>
+        <button class='substract-number-button'>
+          -
+        </button>
+        <button class='delete-spinbox-button'>
+          스핀박스 삭제하기
+        </button>
+      </div>
+    </div>
+  `;
+}
 
-    console.log(result.textContent);
-  });
-});
+function returnAddSpinboxButtonTemplate() {
+  return `
+    <button class='add-spinbox-button'>스핀박스 추가하기</button>
+  `;
+}
+
+function init() {
+  $('#app').innerHTML = returnSpinboxHTMLTemplate();
+  $('#app').insertAdjacentHTML('beforeend', returnAddSpinboxButtonTemplate());
+}
+
+function main() {
+  init();
+}
