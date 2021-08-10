@@ -26,7 +26,7 @@ function returnSpinboxHTMLTemplate() {
 
 function returnAddSpinboxButtonTemplate() {
   return `
-    <button class='add-spinbox-button'>스핀박스 추가하기</button>
+    <button id='add-spinbox-button'>스핀박스 레이아웃 추가하기</button>
   `;
 }
 
@@ -46,11 +46,43 @@ function onClickSubstractNumberButton(event) {
   $input.value = parseInt($input.value, 10) - 1;
 }
 
+function onClickDeleteSpinboxButton(event) {
+  const {target} = event;
+  const $spinbox = target.closest('.spinbox-board');
+
+  $spinbox.remove();
+}
+
+function calcLastSpinboxIndex() {
+  return $$('.spinbox-board').length - 1;
+}
+
+function getLastSpinbox() {
+  return $$('.spinbox-board')[calcLastSpinboxIndex()];
+}
+
+function onClickAddSpinboxButton() {
+  let lastSpinbox = getLastSpinbox();
+
+  if (lastSpinbox) {
+    lastSpinbox.insertAdjacentHTML('afterend', returnSpinboxHTMLTemplate());
+    lastSpinbox = getLastSpinbox();
+    on($('.add-number-button', lastSpinbox), 'click', onClickAddNumberButton);
+    on($('.substract-number-button', lastSpinbox), 'click', onClickSubstractNumberButton);
+    on($('.delete-spinbox-button', lastSpinbox), 'click', onClickDeleteSpinboxButton);
+  } else {
+    init();
+    addEvents();
+  }
+}
+
 function addEvents() {
   $$('.spinbox-board').forEach(spinbox => {
     on($('.add-number-button', spinbox), 'click', onClickAddNumberButton);
     on($('.substract-number-button', spinbox), 'click', onClickSubstractNumberButton);
+    on($('.delete-spinbox-button', spinbox), 'click', onClickDeleteSpinboxButton);
   });
+  on($('#add-spinbox-button'), 'click', onClickAddSpinboxButton);
 }
 
 function init() {
