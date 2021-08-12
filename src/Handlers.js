@@ -21,7 +21,11 @@ export class Handlers {
 
     if (target.id === 'add-spinbox-button') {
       this.addSpinbox();
-      on($$('.spinbox__button', this.getLastSpinbox()), 'mouseleave', this.handleMouseLeave);
+      on(
+        $$('.spinbox__button', this.getLastSpinbox()),
+        'mouseleave',
+        this.handleMouseLeave
+      );
     } else if (target.className === 'spinbox__button delete') {
       this.deleteSpinbox(target);
     }

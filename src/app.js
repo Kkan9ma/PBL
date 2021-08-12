@@ -14,7 +14,11 @@ class SpinboxApp {
     on($('#app'), 'click', this.handlers.handleClick);
     on($('#app'), 'mouseup', this.handlers.handleMouseup);
     on($('#app'), 'mousedown', this.handlers.handleMousedown);
-    on($$('.spinbox__button', $('#app')), 'mouseleave', this.handlers.handleMouseLeave);
+    on(
+      $$('.spinbox__button', $('#app')),
+      'mouseleave',
+      this.handlers.handleMouseLeave
+    );
   }
 
   init() {
