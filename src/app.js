@@ -1,9 +1,9 @@
 'use strict';
 
+import {$, $$, on} from './helpers.js';
+import {returnSpinboxHTMLTemplate, returnAddSpinboxButtonHTMLTemplate} from './templates.js';
+
 document.addEventListener('DOMContentLoaded', main);
-const $ = (selector, scope = document) => scope.querySelector(selector);
-const $$ = (selector, scope = document) => scope.querySelectorAll(selector);
-const on = (target, eventName, handler) => target.addEventListener(eventName, handler);
 
 let isPressed = false;
 let counter = 1000;
@@ -23,36 +23,13 @@ function onMouseUpSubstractNumberButton() {
   counter = 1000;
 }
 
-function returnSpinboxHTMLTemplate() {
-  return `
-    <div class='spinbox-board'>
-      <div class='spinbox'>
-        <input type='text' value='0' />
-        <button class='add-number-button'>
-          +
-        </button>
-        <button class='substract-number-button'>
-          -
-        </button>
-        <button class='delete-spinbox-button'>
-          스핀박스 삭제하기
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function returnAddSpinboxButtonTemplate() {
-  return `
-    <button id='add-spinbox-button'>스핀박스 레이아웃 추가하기</button>
-  `;
-}
-
 function changeValue(action, $input) {
   if (!isPressed) {
     return;
   }
-  counter > 35 ? counter /= 1.1 : counter;
+  if (counter > 35) {
+    counter /= 1.1;
+  }
   $input.value = parseInt($input.value, 10) + parseInt(action, 10);
   setTimeout(() => {
     changeValue(action, $input);
@@ -138,7 +115,7 @@ function addEvents() {
 
 function init() {
   $('#app').innerHTML = returnSpinboxHTMLTemplate();
-  $('#app').insertAdjacentHTML('beforeend', returnAddSpinboxButtonTemplate());
+  $('#app').insertAdjacentHTML('beforeend', returnAddSpinboxButtonHTMLTemplate());
 }
 
 function main() {
