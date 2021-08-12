@@ -1,27 +1,15 @@
 'use strict';
 
-import {$, $$, on} from './helpers.js';
-import {returnSpinboxHTMLTemplate, returnAddSpinboxButtonHTMLTemplate} from './templates.js';
+import { $, $$, on } from './helpers.js';
+import {
+  returnSpinboxHTMLTemplate,
+  returnAddSpinboxButtonHTMLTemplate,
+} from './templates.js';
 
 document.addEventListener('DOMContentLoaded', main);
 
 let isPressed = false;
 let counter = 1000;
-
-document.addEventListener('mouseup', () => {
-  isPressed = false;
-  counter = 1000;
-});
-
-function onMouseUpAddNumberButton() {
-  isPressed = false;
-  counter = 1000;
-}
-
-function onMouseUpSubstractNumberButton() {
-  isPressed = false;
-  counter = 1000;
-}
 
 function changeValue(action, $input) {
   if (!isPressed) {
@@ -36,86 +24,88 @@ function changeValue(action, $input) {
   }, counter);
 }
 
-function onMouseDownAddNumberButton(event) {
-  const {target} = event;
-  const $spinbox = target.closest('.spinbox');
-  const $input = $('input', $spinbox);
+function handleMouseup(event) {
+  const { target } = event;
 
-  isPressed = true;
-  changeValue(1, $input);
+  if (target.classList.contains('spinbox__button')) {
+    isPressed = false;
+    counter = 1000;
+  }
 }
 
-function onMouseDownSubstractNumberButton(event) {
-  const {target} = event;
-  const $spinbox = target.closest('.spinbox');
-  const $input = $('input', $spinbox);
+function handleMouseLeave(event) {
+  const { target } = event;
 
-  isPressed = true;
-  changeValue(-1, $input);
+  if (target.classList.contains('spinbox__button')) {
+    isPressed = false;
+    counter = 1000;
+  }
 }
 
-function onClickDeleteSpinboxButton(event) {
-  const {target} = event;
-  const $spinbox = target.closest('.spinbox-board');
+function handleMousedown(event) {
+  const { target } = event;
+
+  if (target.classList.contains('spinbox__button')) {
+    const $spinbox = target.closest('.spinbox');
+    const $input = $('input', $spinbox);
+
+    if (target.classList.contains('add')) {
+      isPressed = true;
+      changeValue(1, $input);
+    } else if (target.classList.contains('substract')) {
+      isPressed = true;
+      changeValue(-1, $input);
+    }
+  }
+}
+
+function deleteSpinbox(target) {
+  const $spinbox = target.closest('.spinbox');
 
   $spinbox.remove();
 }
 
-function calcLastSpinboxIndex() {
-  return $$('.spinbox-board').length - 1;
-}
+function handleClick(event) {
+  const { target } = event;
 
-function getLastSpinbox() {
-  return $$('.spinbox-board')[calcLastSpinboxIndex()];
-}
-
-function onClickAddSpinboxButton() {
-  let lastSpinbox = getLastSpinbox();
-
-  if (lastSpinbox) {
-    lastSpinbox.insertAdjacentHTML('afterend', returnSpinboxHTMLTemplate());
-    lastSpinbox = getLastSpinbox();
-    on($('.add-number-button', lastSpinbox), 'mouseup', onMouseUpAddNumberButton);
-    on($('.add-number-button', lastSpinbox), 'mousedown', onMouseDownAddNumberButton);
-    on($('.add-number-button', lastSpinbox), 'mouseleave', () => {
-      isPressed = false;
-      counter = 1000;
-    });
-    on($('.substract-number-button', lastSpinbox), 'mouseup', onMouseUpSubstractNumberButton);
-    on($('.substract-number-button', lastSpinbox), 'mousedown', onMouseDownSubstractNumberButton);
-    on($('.substract-number-button', lastSpinbox), 'mouseleave', () => {
-      isPressed = false;
-      counter = 1000;
-    });
-    on($('.delete-spinbox-button', lastSpinbox), 'click', onClickDeleteSpinboxButton);
-  } else {
-    init();
-    addEvents();
+  if (target.id === 'add-spinbox-button') {
+    addSpinbox();
+  } else if (target.className === 'spinbox__button delete') {
+    deleteSpinbox(target);
   }
 }
 
+function calcLastSpinboxIndex() {
+  return $$('.spinbox').length - 1;
+}
+
+function getLastSpinbox() {
+  return $$('.spinbox')[calcLastSpinboxIndex()];
+}
+
+function addSpinbox() {
+  const lastSpinbox = getLastSpinbox();
+
+  if (lastSpinbox) {
+    lastSpinbox.insertAdjacentHTML('afterend', returnSpinboxHTMLTemplate());
+    return;
+  }
+  $('#app').insertAdjacentHTML('afterbegin', returnSpinboxHTMLTemplate());
+}
+
 function addEvents() {
-  $$('.spinbox-board').forEach(spinbox => {
-    on($('.add-number-button', spinbox), 'mouseup', onMouseUpAddNumberButton);
-    on($('.add-number-button', spinbox), 'mousedown', onMouseDownAddNumberButton);
-    on($('.substract-number-button', spinbox), 'mouseup', onMouseUpSubstractNumberButton);
-    on($('.substract-number-button', spinbox), 'mousedown', onMouseDownSubstractNumberButton);
-    on($('.add-number-button', spinbox), 'mouseleave', () => {
-      isPressed = false;
-      counter = 1000;
-    });
-    on($('.substract-number-button', spinbox), 'mouseleave', () => {
-      isPressed = false;
-      counter = 1000;
-    });
-    on($('.delete-spinbox-button', spinbox), 'click', onClickDeleteSpinboxButton);
-  });
-  on($('#add-spinbox-button'), 'click', onClickAddSpinboxButton);
+  on($('#app'), 'mouseup', handleMouseup);
+  on($('#app'), 'mousedown', handleMousedown);
+  on($('#app'), 'mouseleave', handleMouseLeave);
+  on($('#app'), 'click', handleClick);
 }
 
 function init() {
-  $('#app').innerHTML = returnSpinboxHTMLTemplate();
-  $('#app').insertAdjacentHTML('beforeend', returnAddSpinboxButtonHTMLTemplate());
+  $('#app').insertAdjacentHTML('beforeend', returnSpinboxHTMLTemplate());
+  $('#app').insertAdjacentHTML(
+    'beforeend',
+    returnAddSpinboxButtonHTMLTemplate()
+  );
 }
 
 function main() {

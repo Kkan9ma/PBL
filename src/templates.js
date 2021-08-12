@@ -1,19 +1,17 @@
 export function returnSpinboxHTMLTemplate() {
   return `
-    <div class='spinbox-board'>
       <div class='spinbox'>
         <input type='text' value='0' />
-        <button class='add-number-button'>
+        <button class='spinbox__button add'>
           +
         </button>
-        <button class='substract-number-button'>
+        <button class='spinbox__button substract'>
           -
         </button>
-        <button class='delete-spinbox-button'>
+        <button class='spinbox__button delete'>
           스핀박스 삭제하기
         </button>
       </div>
-    </div>
   `;
 }
 
