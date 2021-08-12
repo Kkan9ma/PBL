@@ -1,13 +1,38 @@
-import * as math from "./math.js";
-import style from "./style.css";
+import { Handlers } from './Handlers.js';
+import { $, $$, on } from './helpers.js';
+import {
+  returnSpinboxHTMLTemplate,
+  returnAddSpinboxButtonHTMLTemplate,
+} from './templates.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.querySelector("#btn");
-  const result = document.querySelector("#result");
+class SpinboxApp {
+  constructor() {
+    this.handlers = new Handlers();
+  }
 
-  btn.addEventListener("click", () => {
-    result.textContent = math.sum(1, 2);
+  addEvents() {
+    on($('#app'), 'click', this.handlers.handleClick);
+    on($('#app'), 'mouseup', this.handlers.handleMouseup);
+    on($('#app'), 'mousedown', this.handlers.handleMousedown);
+    on(
+      $$('.spinbox__button', $('#app')),
+      'mouseleave',
+      this.handlers.handleMouseLeave
+    );
+  }
 
-    console.log(result.textContent);
-  });
+  init() {
+    $('#app').insertAdjacentHTML('beforeend', returnSpinboxHTMLTemplate());
+    $('#app').insertAdjacentHTML(
+      'beforeend',
+      returnAddSpinboxButtonHTMLTemplate()
+    );
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const spinboxApp = new SpinboxApp();
+
+  spinboxApp.init();
+  spinboxApp.addEvents();
 });
