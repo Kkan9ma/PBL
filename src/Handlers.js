@@ -1,4 +1,4 @@
-import { $, $$ } from './helpers.js';
+import { $, $$, on } from './helpers.js';
 import { returnSpinboxHTMLTemplate } from './templates.js';
 
 export class Handlers {
@@ -21,6 +21,7 @@ export class Handlers {
 
     if (target.id === 'add-spinbox-button') {
       this.addSpinbox();
+      on($$('.spinbox__button', this.getLastSpinbox()), 'mouseleave', this.handleMouseLeave);
     } else if (target.className === 'spinbox__button delete') {
       this.deleteSpinbox(target);
     }
@@ -86,9 +87,9 @@ export class Handlers {
 
     if (lastSpinbox) {
       lastSpinbox.insertAdjacentHTML('afterend', returnSpinboxHTMLTemplate());
-      return;
+    } else {
+      $('#app').insertAdjacentHTML('afterbegin', returnSpinboxHTMLTemplate());
     }
-    $('#app').insertAdjacentHTML('afterbegin', returnSpinboxHTMLTemplate());
   }
 
   deleteSpinbox(target) {

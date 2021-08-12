@@ -1,5 +1,5 @@
 import { Handlers } from './Handlers.js';
-import { $, on } from './helpers.js';
+import { $, $$, on } from './helpers.js';
 import {
   returnSpinboxHTMLTemplate,
   returnAddSpinboxButtonHTMLTemplate,
@@ -14,7 +14,7 @@ class SpinboxApp {
     on($('#app'), 'click', this.handlers.handleClick);
     on($('#app'), 'mouseup', this.handlers.handleMouseup);
     on($('#app'), 'mousedown', this.handlers.handleMousedown);
-    on($('#app'), 'mouseleave', this.handlers.handleMouseLeave);
+    on($$('.spinbox__button', $('#app')), 'mouseleave', this.handlers.handleMouseLeave);
   }
 
   init() {
