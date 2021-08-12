@@ -1,7 +1,7 @@
 export function returnSpinboxHTMLTemplate() {
   return `
       <div class='spinbox'>
-        <input type='text' value='0' />
+        <input type='number' value='0' />
         <button class='spinbox__button add'>
           +
         </button>
