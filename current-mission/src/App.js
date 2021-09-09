@@ -1,5 +1,5 @@
-import React from 'react';
-import SpinboxContainer from './Components/SpinboxContainer';
+import React from "react";
+import SpinboxContainer from "./components/SpinboxContainer";
 
 function App() {
   return (

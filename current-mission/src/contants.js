@@ -1,0 +1,3 @@
+const INITIAL_ORDER_NUMBER = 1;
+
+export default INITIAL_ORDER_NUMBER;
