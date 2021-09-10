@@ -1,3 +1,1 @@
-const INITIAL_ORDER_NUMBER = 1;
-
-export default INITIAL_ORDER_NUMBER;
+export default const INITIAL_ID = 0;
