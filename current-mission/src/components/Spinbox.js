@@ -1,7 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 function Spinbox({ id, onRemove }) {
   const [inputValue, setInputValue] = useState(0);
+  const delayTime = useRef(1000);
+  const [timeoutID, setTimeoutID] = useState(0);
+
+  const updateValue = (event) => {
+    if (timeoutID !== 0) {
+      clearTimeout(timeoutID);
+    }
+    setInputValue((prevState) => {
+      event.target.classList.contains("substract") === true
+        ? --prevState
+        : ++prevState;
+      return prevState;
+    });
+    delayTime.current *= 0.8;
+    setTimeoutID(() => {
+      const id = setTimeout(() => {
+        updateValue(event);
+      }, delayTime.current);
+
+      return id;
+    });
+  };
 
   return (
     <>
@@ -15,20 +37,28 @@ function Spinbox({ id, onRemove }) {
         />
         <button
           className="spinbox__button add"
-          onClick={() => {
-            setInputValue((prevState) => {
-              return ++prevState;
-            });
+          onMouseDown={(e) => {
+            updateValue(e);
+          }}
+          onMouseUp={() => {
+            // TODO
+            clearTimeout(timeoutID);
+            delayTime.current = 1000;
+            setTimeoutID(0);
           }}
         >
           +
         </button>
         <button
           className="spinbox__button substract"
-          onClick={() => {
-            setInputValue((prevState) => {
-              return --prevState;
-            });
+          onMouseDown={(e) => {
+            updateValue(e);
+          }}
+          onMouseUp={() => {
+            // TODO
+            clearTimeout(timeoutID);
+            delayTime.current = 1000;
+            setTimeoutID(0);
           }}
         >
           -
