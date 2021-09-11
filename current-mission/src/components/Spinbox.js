@@ -1,28 +1,51 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 
 function Spinbox({ id, onRemove }) {
-  const [inputValue, setInputValue] = useState(0);
-  const delayTime = useRef(1000);
-  const [timeoutID, setTimeoutID] = useState(0);
+  const [inputValue, setInputValue] = useState(0); // TODO: magic number
+  const delayTime = useRef(1000); // TODO: magic number
+  const [timeoutID, setTimeoutID] = useState(0); // TODO: magic number
 
-  const updateValue = (event) => {
-    if (timeoutID !== 0) {
+  const updateInputValueFasterRecursively = (event) => {
+    setTimeoutID(() => {
+      return setTimeout(() => {
+        updateInputValue(event);
+      }, (delayTime.current *= 0.8)); // TODO: magic number
+    });
+  };
+
+  const updateInputValue = (event) => {
+    setInputValue((prevState) => {
+      return event.target.classList.contains('add') === true
+        ? ++prevState
+        : --prevState;
+    });
+    updateInputValueFasterRecursively(event);
+  };
+
+  const initStateValues = () => {
+    clearTimeout(timeoutID);
+    delayTime.current = 1000; // TODO: magic number
+    setTimeoutID(0); // TODO: magic number
+  };
+
+  const isEventFromLeftButton = (event) => {
+    return event.button === 0; // TODO: magic number
+  };
+
+  // TODO: magicNumber
+  const isTimeoutIdInitialized = (timeoutID) => {
+    return timeoutID === 0; // TODO: magic number
+  };
+
+  const handleMousedown = (event) => {
+    if (!isEventFromLeftButton(event)) {
+      initStateValues();
+      return;
+    }
+    if (!isTimeoutIdInitialized(timeoutID)) {
       clearTimeout(timeoutID);
     }
-    setInputValue((prevState) => {
-      event.target.classList.contains("substract") === true
-        ? --prevState
-        : ++prevState;
-      return prevState;
-    });
-    delayTime.current *= 0.8;
-    setTimeoutID(() => {
-      const id = setTimeout(() => {
-        updateValue(event);
-      }, delayTime.current);
-
-      return id;
-    });
+    updateInputValue(event);
   };
 
   return (
@@ -31,62 +54,29 @@ function Spinbox({ id, onRemove }) {
         <input
           type="number"
           value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value);
+          onChange={(event) => {
+            setInputValue(event.target.value);
           }}
         />
         <button
           className="spinbox__button add"
-          onMouseDown={(e) => {
-            if (e.button === 0) {
-              updateValue(e);
-              return;
-            }
-            clearTimeout(timeoutID);
-            delayTime.current = 1000;
-            setTimeoutID(0)
-          }}
-          onMouseUp={() => {
-            clearTimeout(timeoutID);
-            delayTime.current = 1000;
-            setTimeoutID(0);
-          }}
-          onMouseLeave={() => {
-            clearTimeout(timeoutID);
-            delayTime.current = 1000;
-            setTimeoutID(0);
-          }}
+          onMouseDown={handleMousedown}
+          onMouseUp={initStateValues}
+          onMouseLeave={initStateValues}
         >
           +
         </button>
         <button
           className="spinbox__button substract"
-          onMouseDown={(e) => {
-            if (e.button === 0) {
-              updateValue(e);
-              return;
-            }
-            clearTimeout(timeoutID);
-            delayTime.current = 1000;
-            setTimeoutID(0)
-          }}
-          onMouseUp={() => {
-            clearTimeout(timeoutID);
-            delayTime.current = 1000;
-            setTimeoutID(0);
-          }}
-          onMouseLeave={() => {
-            clearTimeout(timeoutID);
-            delayTime.current = 1000;
-            setTimeoutID(0);
-          }}
+          onMouseDown={handleMousedown}
+          onMouseUp={initStateValues}
+          onMouseLeave={initStateValues}
         >
           -
         </button>
         <button
           className="spinbox__button delete"
-          onMouseDown={(e) => {
-            e.preventDefault();
+          onMouseDown={() => {
             onRemove(id);
           }}
         >
