@@ -1,15 +1,23 @@
 import React, { useState, useRef } from 'react';
+import {SPINBOX_STATE} from '../constants';
 
 function Spinbox({ id, onRemove }) {
-  const [inputValue, setInputValue] = useState(0); // TODO: magic number
-  const delayTime = useRef(1000); // TODO: magic number
-  const [timeoutID, setTimeoutID] = useState(0); // TODO: magic number
+  const [inputValue, setInputValue] = useState(
+    SPINBOX_STATE.INITIAL_INPUT_VALUE
+  );
+  const delayTime = useRef(SPINBOX_STATE.INITIAL_DELAY_TIME);
+  const [timeoutID, setTimeoutID] = useState(SPINBOX_STATE.INITIAL_TIMEOUT_ID);
 
   const updateInputValueFasterRecursively = (event) => {
     setTimeoutID(() => {
-      return setTimeout(() => {
-        updateInputValue(event);
-      }, (delayTime.current *= 0.8)); // TODO: magic number
+      return setTimeout(
+        () => {
+          updateInputValue(event);
+        },
+        delayTime.current > SPINBOX_STATE.MINIMUM_DELAY_TIME
+          ? (delayTime.current /= SPINBOX_STATE.DELAYTIME_DECREASE_RATE)
+          : SPINBOX_STATE.MINIMUM_DELAY_TIME
+      );
     });
   };
 
@@ -24,17 +32,16 @@ function Spinbox({ id, onRemove }) {
 
   const initStateValues = () => {
     clearTimeout(timeoutID);
-    delayTime.current = 1000; // TODO: magic number
-    setTimeoutID(0); // TODO: magic number
+    delayTime.current = SPINBOX_STATE.INITIAL_DELAY_TIME;
+    setTimeoutID(SPINBOX_STATE.INITIAL_TIMEOUT_ID);
   };
 
   const isEventFromLeftButton = (event) => {
-    return event.button === 0; // TODO: magic number
+    return event.button === SPINBOX_STATE.LEFT_BUTTON;
   };
 
-  // TODO: magicNumber
   const isTimeoutIdInitialized = (timeoutID) => {
-    return timeoutID === 0; // TODO: magic number
+    return timeoutID === SPINBOX_STATE.INITIAL_TIMEOUT_ID;
   };
 
   const handleMousedown = (event) => {

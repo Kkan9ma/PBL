@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import SpinboxList from "./SpinboxList";
-import INITIAL_ID from "../contants.js";
+import React, { useState } from 'react';
+import SpinboxList from './SpinboxList';
+import {SPINBOX_STATE} from '../constants';
 
 function SpinboxContainer() {
-  const [spinboxes, setSpinboxes] = useState([{ id: INITIAL_ID }]);
-  const [nextId, setNextId] = useState(INITIAL_ID + 1);
+  const [spinboxes, setSpinboxes] = useState([
+    {id: SPINBOX_STATE.INITIAL_ID, }
+  ]);
+  const [nextId, setNextId] = useState(SPINBOX_STATE.INITIAL_ID + 1);
 
   const onAddNewSpinbox = () => {
     setSpinboxes((prevState) => {
