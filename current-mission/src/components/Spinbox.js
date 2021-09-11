@@ -38,10 +38,20 @@ function Spinbox({ id, onRemove }) {
         <button
           className="spinbox__button add"
           onMouseDown={(e) => {
-            updateValue(e);
+            if (e.button === 0) {
+              updateValue(e);
+              return;
+            }
+            clearTimeout(timeoutID);
+            delayTime.current = 1000;
+            setTimeoutID(0)
           }}
           onMouseUp={() => {
-            // TODO
+            clearTimeout(timeoutID);
+            delayTime.current = 1000;
+            setTimeoutID(0);
+          }}
+          onMouseLeave={() => {
             clearTimeout(timeoutID);
             delayTime.current = 1000;
             setTimeoutID(0);
@@ -52,10 +62,20 @@ function Spinbox({ id, onRemove }) {
         <button
           className="spinbox__button substract"
           onMouseDown={(e) => {
-            updateValue(e);
+            if (e.button === 0) {
+              updateValue(e);
+              return;
+            }
+            clearTimeout(timeoutID);
+            delayTime.current = 1000;
+            setTimeoutID(0)
           }}
           onMouseUp={() => {
-            // TODO
+            clearTimeout(timeoutID);
+            delayTime.current = 1000;
+            setTimeoutID(0);
+          }}
+          onMouseLeave={() => {
             clearTimeout(timeoutID);
             delayTime.current = 1000;
             setTimeoutID(0);
@@ -65,7 +85,7 @@ function Spinbox({ id, onRemove }) {
         </button>
         <button
           className="spinbox__button delete"
-          onClick={(e) => {
+          onMouseDown={(e) => {
             e.preventDefault();
             onRemove(id);
           }}
