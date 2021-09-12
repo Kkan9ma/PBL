@@ -81,7 +81,7 @@ function Spinbox({ id, onRemove }) {
         </button>
         <button
           className='spinbox__button delete'
-          onMouseDown={() => {
+          onClick={() => {
             onRemove(id);
           }}
         >
