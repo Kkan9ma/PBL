@@ -1,12 +1,10 @@
-import React from "react";
-import SpinboxContainer from "./components/SpinboxContainer";
+import React from 'react';
+import SpinboxContainer from './components/SpinboxContainer';
 
 function App() {
   return (
     <>
-      <section className="spinbox-section">
-        <SpinboxContainer />
-      </section>
+      <SpinboxContainer />
     </>
   );
 }
