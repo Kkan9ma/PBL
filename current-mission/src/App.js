@@ -1,9 +1,10 @@
 import React from 'react';
+import SpinboxContainer from './components/SpinboxContainer';
 
 function App() {
   return (
     <>
-      <div>Hello world!</div>
+      <SpinboxContainer />
     </>
   );
 }
