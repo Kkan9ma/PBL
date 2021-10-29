@@ -4,4 +4,7 @@ module.exports = {
   rules: {
     // Override rules or Add more rules
   },
+  parserOptions: {
+    sourceType: 'module',
+  },
 };

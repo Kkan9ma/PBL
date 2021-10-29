@@ -1,0 +1,12 @@
+ul#editor__toolbar {
+  margin: 0 0 5px 0;
+  padding-inline: 0;
+}
+
+li.editor__button-container {
+  display: inline;
+}
+
+div#editor__contentContainer {
+  border: 1px solid black;
+}
