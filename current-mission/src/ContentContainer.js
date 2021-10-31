@@ -5,7 +5,6 @@ export default function ContentContainer($target) {
   $div.setAttribute('contentEditable', true);
 
   this.render = () => {
-    $div.innerHTML = `콘텐츠 입력`;
     $target.appendChild($div);
   };
   this.render();
