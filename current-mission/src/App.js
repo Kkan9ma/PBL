@@ -27,14 +27,21 @@ export default function App($target) {
     range.insertNode(newNode);
   };
 
+  const getParentElement = (defaultParentTag, currentParentTag) =>
+    currentParentTag === defaultParentTag
+      ? document.createDocumentFragment()
+      : document.createElement(currentParentTag);
+
   const phraseCurrentRange = (range, phrasingTag, currentParentTag) => {
-    const parentElement = document.createElement(currentParentTag);
+    const defaultParentTag = 'DIV';
+    const parentElement = getParentElement(defaultParentTag, currentParentTag);
     const childElement = document.createElement(phrasingTag);
 
     childElement.innerText = range.toLocaleString();
     parentElement.appendChild(childElement);
     range.deleteContents();
-    range.insertNode(childElement);
+    range.insertNode(parentElement);
+    // TODO: 부모를 검사해서 중복된 태그가 있으면 추가하지 않기.
   };
 
   const togglePhrasing = (target, selectionRange) => {
