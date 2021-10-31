@@ -4,43 +4,56 @@ import './styles/styles.css';
 
 export default function App($target) {
   const $div = document.createElement('div');
+
   $div.id = 'editor';
 
-  this.state = [];
+  const getSelectionRange = () => {
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+
+    if (!range.toLocaleString().length) {
+      return false;
+    }
+    return range;
+  }
+
+  const unphraseRange = (range) => {
+    const currentString = range.toLocaleString();
+
+    range.deleteContents();
+    range.commonAncestorContainer.parentNode.remove();
+    range.insertNode(document.createTextNode(currentString));
+  }
+
+  const phraseCurrentRange = (range, phrasingTag, currentParentTag) => {
+    const parentElement = document.createElement(currentParentTag);
+    const childElement = document.createElement(phrasingTag);
+    
+    childElement.innerText = range.toLocaleString();
+    parentElement.appendChild(childElement);
+    range.deleteContents();
+    range.insertNode(childElement);
+  }
+
+  const togglePhrasing = (target, selectionRange) => {
+    const clickedTag = target.dataset.command[0].toUpperCase();
+    const rangeParentNodeTag = selectionRange.commonAncestorContainer.parentNode.tagName; // if not anything in there, result will be 'DIV'
+
+    if (clickedTag === rangeParentNodeTag) {
+      unphraseRange(selectionRange);
+      return;
+    }
+    phraseCurrentRange(selectionRange, clickedTag, rangeParentNodeTag);
+  }
 
   const handleClick = (event) => {
     const { target } = event;
-    const selection = window.getSelection();
+    const selectionRange = getSelectionRange();
 
-    if (target.type !== 'button') {
+    if (target.type !== 'button' || !selectionRange) {
       return;
     }
-    if (!selection.focusNode) {
-      return;
-    }
-
-    const range = selection.getRangeAt(0);
-    const parentNode = range.commonAncestorContainer.parentNode.tagName;
-    const currentString = range.toLocaleString();
-    const span = document.createElement('span');
-
-    if (target.dataset.command[0].toUpperCase() === parentNode) {
-      span.innerText = currentString;
-      range.deleteContents();
-      range.commonAncestorContainer.parentNode.remove();
-      range.insertNode(span);
-      return;
-    }
-    if (target.dataset.command[0].toUpperCase() !== parentNode) {
-      const parentEl = document.createElement(parentNode);
-      const childEl = document.createElement(
-        target.dataset.command[0].toLowerCase(),
-      );
-      childEl.innerText = currentString;
-      parentEl.appendChild(childEl);
-      range.deleteContents();
-      range.insertNode(childEl);
-    }
+    togglePhrasing(target, selectionRange);
   };
 
   this.render = () => {
