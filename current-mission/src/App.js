@@ -14,37 +14,41 @@ export default function App($target) {
     if (!range.toLocaleString().length) {
       return false;
     }
+
     return range;
-  }
+  };
 
   const unphraseRange = (range) => {
     const currentString = range.toLocaleString();
+    const newNode = document.createTextNode(currentString);
 
     range.deleteContents();
     range.commonAncestorContainer.parentNode.remove();
-    range.insertNode(document.createTextNode(currentString));
-  }
+    range.insertNode(newNode);
+  };
 
   const phraseCurrentRange = (range, phrasingTag, currentParentTag) => {
     const parentElement = document.createElement(currentParentTag);
     const childElement = document.createElement(phrasingTag);
-    
+
     childElement.innerText = range.toLocaleString();
     parentElement.appendChild(childElement);
     range.deleteContents();
     range.insertNode(childElement);
-  }
+  };
 
   const togglePhrasing = (target, selectionRange) => {
     const clickedTag = target.dataset.command[0].toUpperCase();
-    const rangeParentNodeTag = selectionRange.commonAncestorContainer.parentNode.tagName; // if not anything in there, result will be 'DIV'
+    const rangeParentNodeTag =
+      selectionRange.commonAncestorContainer.parentNode.tagName; // if not anything in there, result will be 'DIV'
 
     if (clickedTag === rangeParentNodeTag) {
       unphraseRange(selectionRange);
+
       return;
     }
     phraseCurrentRange(selectionRange, clickedTag, rangeParentNodeTag);
-  }
+  };
 
   const handleClick = (event) => {
     const { target } = event;

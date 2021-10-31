@@ -1,4 +1,4 @@
-export default function Toolbar($target, initialState) {
+export default function Toolbar($target) {
   const $ul = document.createElement('ul');
   $ul.id = 'editor__toolbar';
 
