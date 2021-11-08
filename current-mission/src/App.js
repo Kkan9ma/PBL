@@ -41,13 +41,12 @@ export default function App($target) {
     parentElement.appendChild(childElement);
     range.deleteContents();
     range.insertNode(parentElement);
-    // TODO: 부모를 검사해서 중복된 태그가 있으면 추가하지 않기.
   };
 
   const togglePhrasing = (target, selectionRange) => {
     const clickedTag = target.dataset.command[0].toUpperCase();
     const rangeParentNodeTag =
-      selectionRange.commonAncestorContainer.parentNode.tagName; // if not anything in there, result will be 'DIV'
+      selectionRange.commonAncestorContainer.parentNode.tagName;
 
     if (clickedTag === rangeParentNodeTag) {
       unphraseRange(selectionRange);
