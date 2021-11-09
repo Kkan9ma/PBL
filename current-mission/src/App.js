@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Editor from './Editor';
 
 function App() {
-  const [counter, setCounter] = useState(0);
-
   return (
     <>
-      <div className="hello">Hello React!</div>
-      <div>{counter}</div>
-      <button
-        onClick={() => {
-          setCounter((prevState) => prevState + 1);
-        }}
-      >
-        +
-      </button>
+      <Editor />
     </>
   );
 }
