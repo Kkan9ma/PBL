@@ -1,6 +1,10 @@
 import React from 'react';
 import Button from './Button';
 
+const handleClickButton = (command) => {
+  document.execCommand(command);
+};
+
 function ButtonList({ commands }) {
   return (
     <>
@@ -11,7 +15,7 @@ function ButtonList({ commands }) {
             command={command}
             text={text}
             onClick={() => {
-              console.log('click');
+              handleClickButton(command);
             }}
           />
         );
