@@ -1,56 +1,56 @@
 export const commandsList = [
   {
     command: 'bold',
-    text: '진하게',
+    value: '진하게',
     execCommand: (command) => {
       document.execCommand(command);
     },
   },
   {
     command: 'italic',
-    text: '기울임',
+    value: '기울임',
     execCommand: (command) => {
       document.execCommand(command);
     },
   },
   {
     command: 'underline',
-    text: '밑줄',
+    value: '밑줄',
     execCommand: (command) => {
       document.execCommand(command);
     },
   },
   {
     command: 'strikethrough',
-    text: '취소선',
+    value: '취소선',
     execCommand: (command) => {
       document.execCommand(command);
     },
   },
   {
     command: 'formatBlock',
-    text: 'H1',
-    execCommand: (command, text) => {
-      document.execCommand(command, false, text);
+    value: 'H1',
+    execCommand: (command, value) => {
+      document.execCommand(command, false, value);
     },
   },
   {
     command: 'formatBlock',
-    text: 'H2',
-    execCommand: (command, text) => {
-      document.execCommand(command, false, text);
+    value: 'H2',
+    execCommand: (command, value) => {
+      document.execCommand(command, false, value);
     },
   },
   {
     command: 'formatBlock',
-    text: 'H3',
-    execCommand: (command, text) => {
-      document.execCommand(command, false, text);
+    value: 'H3',
+    execCommand: (command, value) => {
+      document.execCommand(command, false, value);
     },
   },
   {
     command: 'createLink',
-    text: 'Link',
+    value: 'Link',
     execCommand: (command) => {
       const URL = prompt('추가할 URL을 입력하세요.');
 
@@ -61,7 +61,7 @@ export const commandsList = [
   },
   {
     command: 'insertImage',
-    text: 'Image',
+    value: 'Image',
     execCommand: (command) => {
       const URL = prompt('추가할 이미지의 URL을 입력하세요.');
 
