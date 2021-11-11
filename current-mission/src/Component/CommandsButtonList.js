@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
 
-function CommandsButtonList({ commandsList }) {
+function CommandsButtonList({
+  commandsList,
+  activatedCommands,
+  handleButtonActivatedState,
+}) {
   return (
     <>
       {commandsList.map(({ command, text, execCommand }, index) => (
@@ -11,7 +15,9 @@ function CommandsButtonList({ commandsList }) {
           text={text}
           onClick={() => {
             execCommand(command, text);
+            handleButtonActivatedState();
           }}
+          isSelected={activatedCommands.includes(command)}
         />
       ))}
     </>
