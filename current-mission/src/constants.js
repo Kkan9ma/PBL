@@ -54,7 +54,7 @@ export const commandsList = [
     execCommand: (command) => {
       const URL = prompt('추가할 URL을 입력하세요.');
 
-      if (URL.trim()) {
+      if (URL && URL.trim()) {
         document.execCommand(command, false, URL);
       }
     },
@@ -65,7 +65,7 @@ export const commandsList = [
     execCommand: (command) => {
       const URL = prompt('추가할 이미지의 URL을 입력하세요.');
 
-      if (URL.trim()) {
+      if (URL && URL.trim()) {
         document.execCommand(command, false, URL);
       }
     },
