@@ -48,4 +48,15 @@ export const commandsList = [
       document.execCommand(command, false, text);
     },
   },
+  {
+    command: 'createLink',
+    text: 'Link',
+    execCommand: (command) => {
+      const URL = prompt('추가할 URL을 입력하세요.');
+
+      if (URL.trim()) {
+        document.execCommand(command, false, URL);
+      }
+    },
+  },
 ];
