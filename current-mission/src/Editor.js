@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Toolbar from './Component/Toolbar';
-import ContentContainer from './Component/ContentContainer';
-import { commandsList } from './constants.js';
+import Toolbar from './Components/Toolbar';
+import ContentContainer from './Components/ContentContainer';
+import { commandsList } from './utils/commandsList.js';
 
 function Editor() {
   const [activatedCommands, setActivatedCommands] = useState([]);
@@ -15,16 +15,15 @@ function Editor() {
   };
 
   return (
-    <>
-      <div className="editor">
-        <Toolbar
-          commandsList={commandsList}
-          activatedCommands={activatedCommands}
-          handleButtonActivatedState={handleButtonActivatedState}
-        />
-        <ContentContainer handleKeyup={handleButtonActivatedState} />
-      </div>
-    </>
+    <div className="editor">
+      <h1>Simple Editor</h1>
+      <Toolbar
+        commandsList={commandsList}
+        activatedCommands={activatedCommands}
+        handleButtonActivatedState={handleButtonActivatedState}
+      />
+      <ContentContainer handleKeyup={handleButtonActivatedState} />
+    </div>
   );
 }
 

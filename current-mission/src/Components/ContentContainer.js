@@ -11,15 +11,13 @@ const handleClick = (e) => {
 
 function ContentContainer({ handleKeyup }) {
   return (
-    <>
-      <div
-        className="editor__content-container"
-        style={{ width: '500px', height: '500px', border: '1px solid black' }}
-        contentEditable="true"
-        onKeyUp={handleKeyup}
-        onClick={handleClick}
-      ></div>
-    </>
+    <div
+      className="editor__content-container"
+      style={{ width: '500px', height: '500px', border: '1px solid black' }}
+      contentEditable="true"
+      onKeyUp={handleKeyup}
+      onClick={handleClick}
+    ></div>
   );
 }
 

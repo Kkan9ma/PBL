@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Button({ command, text, onClick, isSelected }) {
+function Button({ command, value, onClick, isSelected }) {
   const defaultButtonStyle = {
     width: '52px',
     height: '52px',
@@ -25,7 +25,7 @@ function Button({ command, text, onClick, isSelected }) {
       onClick={onClick}
       style={isSelected ? selectedButtonStyle : defaultButtonStyle}
     >
-      {text}
+      {value}
     </button>
   );
 }
