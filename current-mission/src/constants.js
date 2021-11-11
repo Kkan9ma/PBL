@@ -59,4 +59,15 @@ export const commandsList = [
       }
     },
   },
+  {
+    command: 'insertImage',
+    text: 'Image',
+    execCommand: (command) => {
+      const URL = prompt('추가할 이미지의 URL을 입력하세요.');
+
+      if (URL.trim()) {
+        document.execCommand(command, false, URL);
+      }
+    },
+  },
 ];
