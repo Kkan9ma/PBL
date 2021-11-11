@@ -9,9 +9,10 @@ const handleClick = (e) => {
   }
 };
 
-function ContentContainer({ handleKeyup }) {
+function ContentContainer({ handleKeyup }, ref) {
   return (
     <div
+      ref={ref}
       className="editor__content-container"
       style={{ width: '500px', height: '500px', border: '1px solid black' }}
       contentEditable="true"
@@ -21,4 +22,4 @@ function ContentContainer({ handleKeyup }) {
   );
 }
 
-export default ContentContainer;
+export default React.forwardRef(ContentContainer);
