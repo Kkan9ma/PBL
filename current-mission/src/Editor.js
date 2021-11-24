@@ -1,28 +1,38 @@
 import React, { useState, useRef } from 'react';
 import Toolbar from './Components/Toolbar';
 import ContentContainer from './Components/ContentContainer';
-import { commandsList } from './utils/commandsList.js';
+import { getCommands, getCommandsMap } from './commands/commandsUtils';
 
 function Editor() {
   const [activatedCommands, setActivatedCommands] = useState([]);
   const [HTMLResult, setHTMLResult] = useState('');
   const contentContainerRef = useRef(null);
+  const commands = getCommands();
 
   const handleActivatedCommandState = () => {
-    const currentCommand = commandsList
-      .map(({ command }) => command)
-      .filter((command) => document.queryCommandState(command));
+    const currentCommand = commands.filter((command) =>
+      document.queryCommandState(command),
+    );
 
     setActivatedCommands(currentCommand);
+  };
+
+  const executeCommand = (command) => {
+    const commandMap = getCommandsMap();
+
+    commandMap[command]();
   };
 
   return (
     <div className="editor">
       <h1>Simple Editor</h1>
       <Toolbar
-        commandsList={commandsList}
+        commands={commands}
         activatedCommands={activatedCommands}
-        handleClick={() => {
+        handleClick={(e) => {
+          const { command } = e.target.dataset;
+
+          executeCommand(command);
           handleActivatedCommandState();
           setHTMLResult(contentContainerRef.current.innerHTML);
         }}

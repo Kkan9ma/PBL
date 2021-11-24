@@ -1,21 +1,25 @@
 import React from 'react';
+import { getCommandValue } from '../commands/commandsUtils';
 import Button from './Button';
 
-function CommandsButtonList({ commandsList, activatedCommands, handleClick }) {
+function CommandsButtonList({ commands, handleClick, activatedCommands }) {
   return (
     <>
-      {commandsList.map(({ command, value, execCommand }, index) => (
-        <Button
-          key={index}
-          command={command}
-          value={value}
-          onClick={() => {
-            execCommand(command, value);
-            handleClick();
-          }}
-          isSelected={activatedCommands.includes(command)}
-        />
-      ))}
+      {commands.map((command, index) => {
+        const value = getCommandValue(command);
+
+        return (
+          <Button
+            key={index}
+            command={command}
+            value={value}
+            onClick={(e) => {
+              handleClick(e);
+            }}
+            isSelected={activatedCommands.includes(command)}
+          />
+        );
+      })}
     </>
   );
 }
