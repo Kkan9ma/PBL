@@ -1,15 +1,19 @@
 import React from 'react';
 import { getCommandValue } from '../commands/commandsUtils';
-import Button from './Button';
+import TextPropertyCommandButton from './TextPropertyCommandButton';
 
-function CommandsButtonList({ commands, handleClick, activatedCommands }) {
+function TextPropertyCommandsButtonList({
+  commands,
+  handleClick,
+  activatedCommands,
+}) {
   return (
     <>
       {commands.map((command, index) => {
-        const value = getCommandValue(command);
+        const value = getCommandValue('textProperty', command);
 
         return (
-          <Button
+          <TextPropertyCommandButton
             key={index}
             command={command}
             value={value}
@@ -24,4 +28,4 @@ function CommandsButtonList({ commands, handleClick, activatedCommands }) {
   );
 }
 
-export default CommandsButtonList;
+export default TextPropertyCommandsButtonList;

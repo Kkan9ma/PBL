@@ -1,4 +1,4 @@
-import { execCommand } from './execCommand';
+import { execCommand } from '../../utils/execCommand';
 
 export const firstHalfCommand = () => {
   execCommand('formatBlock', false, 'H1');

@@ -1,6 +1,11 @@
-import { commandsMap, commandsValuesMap } from './commandsMap';
+import { EntireCommandsMap, EntireCommandsValuesMap } from './commandsMap';
 
-export const getCommandsMap = () => commandsMap;
-export const getCommands = () => Object.keys(getCommandsMap());
-export const getCommandsValueMap = (command) => commandsValuesMap[command];
-export const getCommandValue = (command) => getCommandsValueMap(command);
+export const getCommandsMap = (category) => {
+  return EntireCommandsMap[category];
+};
+
+export const getCommands = (category) => Object.keys(getCommandsMap(category));
+export const getCommandsValueMap = (category, command) =>
+  EntireCommandsValuesMap[category][command];
+export const getCommandValue = (category, command) =>
+  getCommandsValueMap(category, command);

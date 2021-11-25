@@ -1,15 +1,15 @@
-import { boldCommand } from './boldCommand';
 import {
+  boldCommand,
+  italicCommand,
+  underlineCommand,
+  strikethroughCommand,
   firstHalfCommand,
-  plainTextCommand,
   secondHalfCommand,
   thirdHalfCommand,
-} from './formatBlockCommands';
-import { italicCommand } from './italicCommand';
-import { strikethroughCommand } from './strikethroughCommand';
-import { underlineCommand } from './underlineCommand';
+  plainTextCommand,
+} from './textPropertyCommands';
 
-export const commandsMap = {
+export const textPropertyCommandsMap = {
   bold: boldCommand,
   italic: italicCommand,
   underline: underlineCommand,
@@ -20,7 +20,7 @@ export const commandsMap = {
   plainText: plainTextCommand,
 };
 
-export const commandsValuesMap = {
+export const textPropertyCommandsValuesMap = {
   bold: '진하게',
   italic: '기울임',
   underline: '밑줄',
@@ -29,4 +29,14 @@ export const commandsValuesMap = {
   secondHalf: 'H2',
   thirdHalf: 'H3',
   plainText: '강조 취소',
+};
+
+export const EntireCommandsMap = {
+  textProperty: textPropertyCommandsMap,
+  // TODO - documentCommand
+};
+
+export const EntireCommandsValuesMap = {
+  textProperty: textPropertyCommandsValuesMap,
+  // TODO - documentCommand
 };

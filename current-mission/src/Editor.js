@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Toolbar from './Components/Toolbar';
+import TextPropertyCommandsToolbar from './Components/Toolbar/TextPropertyCommandsToolbar';
 import ContentContainer from './Components/ContentContainer';
 import { getCommands, getCommandsMap } from './commands/commandsUtils';
 
@@ -7,18 +7,18 @@ function Editor() {
   const [activatedCommands, setActivatedCommands] = useState([]);
   const [HTMLResult, setHTMLResult] = useState('');
   const contentContainerRef = useRef(null);
-  const commands = getCommands();
+  const textPropertyCommands = getCommands('textProperty');
 
   const handleActivatedCommandState = () => {
-    const currentCommand = commands.filter((command) =>
+    const currentCommand = textPropertyCommands.filter((command) =>
       document.queryCommandState(command),
     );
 
     setActivatedCommands(currentCommand);
   };
 
-  const executeCommand = (command) => {
-    const commandMap = getCommandsMap();
+  const executeTextPropertyCommand = (command) => {
+    const commandMap = getCommandsMap('textProperty');
 
     commandMap[command]();
   };
@@ -26,13 +26,13 @@ function Editor() {
   return (
     <div className="editor">
       <h1>Simple Editor</h1>
-      <Toolbar
-        commands={commands}
+      <TextPropertyCommandsToolbar
+        commands={textPropertyCommands}
         activatedCommands={activatedCommands}
         handleClick={(e) => {
           const { command } = e.target.dataset;
 
-          executeCommand(command);
+          executeTextPropertyCommand(command);
           handleActivatedCommandState();
           setHTMLResult(contentContainerRef.current.innerHTML);
         }}
