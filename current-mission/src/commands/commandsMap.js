@@ -31,12 +31,24 @@ export const textPropertyCommandsValuesMap = {
   plainText: '강조 취소',
 };
 
+const insertImageCommand = () => {
+  console.log('insertImage');
+}
+
+export const documentElementCommandsMap = {
+  'image': insertImageCommand,
+};
+
+export const documentElementCommandsValuesMap = {
+  'image': '이미지'
+};
+
 export const EntireCommandsMap = {
   textProperty: textPropertyCommandsMap,
-  // TODO - documentCommand
+  documentElement: documentElementCommandsMap
 };
 
 export const EntireCommandsValuesMap = {
   textProperty: textPropertyCommandsValuesMap,
-  // TODO - documentCommand
+  documentElement: documentElementCommandsValuesMap
 };

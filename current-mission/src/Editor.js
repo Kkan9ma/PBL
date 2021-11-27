@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
-import TextPropertyCommandsToolbar from './Components/Toolbar/TextPropertyCommandsToolbar';
 import ContentContainer from './Components/ContentContainer';
-import { getCommands, getCommandsMap } from './commands/commandsUtils';
+import TextPropertyCommandsToolbar from './Components/Toolbar/TextPropertyCommandsToolbar';
+import DocumentElementCommandsToolbar from './Components/Toolbar/DocumentElementCommandsToolbar';
+import { textPropertyCommands, documentElementCommands, getCommandCategory, getCommandsMap, } from './commands/commandsUtils';
 
 function Editor() {
-  const [activatedCommands, setActivatedCommands] = useState([]);
-  const [HTMLResult, setHTMLResult] = useState('');
   const contentContainerRef = useRef(null);
-  const textPropertyCommands = getCommands('textProperty');
+  const [HTMLResult, setHTMLResult] = useState('');
+  const [activatedCommands, setActivatedCommands] = useState([]);
 
   const handleActivatedCommandState = () => {
     const currentCommand = textPropertyCommands.filter((command) =>
@@ -17,10 +17,11 @@ function Editor() {
     setActivatedCommands(currentCommand);
   };
 
-  const executeTextPropertyCommand = (command) => {
-    const commandMap = getCommandsMap('textProperty');
+  const execute = (command) => {
+    const commandCategory = getCommandCategory(command);
+    const commandsMap = getCommandsMap(commandCategory);
 
-    commandMap[command]();
+    commandsMap[command]();
   };
 
   return (
@@ -32,8 +33,17 @@ function Editor() {
         handleClick={(e) => {
           const { command } = e.target.dataset;
 
-          executeTextPropertyCommand(command);
+          execute(command);
           handleActivatedCommandState();
+          setHTMLResult(contentContainerRef.current.innerHTML);
+        }}
+      />
+      <DocumentElementCommandsToolbar
+        commands={documentElementCommands}
+        handleClick={(e) => {
+          const { command } = e.target.dataset;
+
+          execute(command);
           setHTMLResult(contentContainerRef.current.innerHTML);
         }}
       />
