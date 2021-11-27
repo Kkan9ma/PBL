@@ -1,39 +1,49 @@
 import React, { useState, useRef } from 'react';
-import Toolbar from './Components/Toolbar';
 import ContentContainer from './Components/ContentContainer';
-import { getCommands, getCommandsMap } from './commands/commandsUtils';
+import TextPropertyCommandsToolbar from './Components/Toolbar/TextPropertyCommandsToolbar';
+import DocumentElementCommandsToolbar from './Components/Toolbar/DocumentElementCommandsToolbar';
+import { textPropertyCommands, documentElementCommands, getCommandCategory, getCommandsMap, } from './commands/commandsUtils';
 
 function Editor() {
-  const [activatedCommands, setActivatedCommands] = useState([]);
-  const [HTMLResult, setHTMLResult] = useState('');
   const contentContainerRef = useRef(null);
-  const commands = getCommands();
+  const [HTMLResult, setHTMLResult] = useState('');
+  const [activatedCommands, setActivatedCommands] = useState([]);
 
   const handleActivatedCommandState = () => {
-    const currentCommand = commands.filter((command) =>
+    const currentCommand = textPropertyCommands.filter((command) =>
       document.queryCommandState(command),
     );
 
     setActivatedCommands(currentCommand);
   };
 
-  const executeCommand = (command) => {
-    const commandMap = getCommandsMap();
+  const execute = (command) => {
+    const commandCategory = getCommandCategory(command);
+    const commandsMap = getCommandsMap(commandCategory);
 
-    commandMap[command]();
+    commandsMap[command]();
   };
 
   return (
     <div className="editor">
       <h1>Simple Editor</h1>
-      <Toolbar
-        commands={commands}
+      <TextPropertyCommandsToolbar
+        commands={textPropertyCommands}
         activatedCommands={activatedCommands}
         handleClick={(e) => {
           const { command } = e.target.dataset;
 
-          executeCommand(command);
+          execute(command);
           handleActivatedCommandState();
+          setHTMLResult(contentContainerRef.current.innerHTML);
+        }}
+      />
+      <DocumentElementCommandsToolbar
+        commands={documentElementCommands}
+        handleClick={(e) => {
+          const { command } = e.target.dataset;
+
+          execute(command);
           setHTMLResult(contentContainerRef.current.innerHTML);
         }}
       />
