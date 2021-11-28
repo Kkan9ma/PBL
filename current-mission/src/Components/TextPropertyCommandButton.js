@@ -1,33 +1,29 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledDefaultButton = styled.button`
+  width: 55px;
+  height: 55px;
+  font-size: 10px;
+  font-weight: ${(props) => (props.isSelected ? '600' : '')};
+  color: ${(props) => (props.isSelected ? '#13C843' : '#333')};
+  background-color: '#FFFFFF';
+  border-radius: 50%;
+  margin: 2px 2px 10px 2px;
+  outline: 0;
+`;
 
 function TextPropertyCommandButton({ command, value, onClick, isSelected }) {
-  const defaultButtonStyle = {
-    width: '55px',
-    height: '55px',
-    fontSize: '10px',
-    backgroundColor: '#FFFFFF',
-    color: '#333',
-    borderRadius: '50%',
-    margin: '2px 2px 10px 2px',
-    outline: '0',
-  };
-
-  const selectedButtonStyle = {
-    ...defaultButtonStyle,
-    color: '#13C843',
-    fontWeight: '600',
-  };
-
   return (
-    <button
+    <StyledDefaultButton
       type="button"
       className="editor__button"
       data-command={command}
       onClick={onClick}
-      style={isSelected ? selectedButtonStyle : defaultButtonStyle}
+      isSelected={isSelected}
     >
       {value}
-    </button>
+    </StyledDefaultButton>
   );
 }
 

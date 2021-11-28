@@ -1,21 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 import DocumentElementCommandsButtonList from '../DocumentElementCommandsButtonList';
 
-function DocumentElementCommandsToolbar({
-  commands,
-  handleClick,
-}) {
+const StyledDefaultToolbar = styled.ul`
+  margin: 0px;
+  padding: 0px;
+`;
+
+function DocumentElementCommandsToolbar({ commands, handleClick }) {
   return (
-    <ul
+    <StyledDefaultToolbar
       className="editor__toolbar"
       data-toolbar="text-property-commands"
-      style={{ margin: '0', padding: '0' }}
     >
       <DocumentElementCommandsButtonList
         commands={commands}
         handleClick={handleClick}
       />
-    </ul>
+    </StyledDefaultToolbar>
   );
 }
 
