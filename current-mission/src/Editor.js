@@ -41,6 +41,7 @@ function Editor() {
       image.src = URL.createObjectURL(currentFile);
       contentContainerRef.current.appendChild(image);
     }
+    setHTMLResult(contentContainerRef.current.innerHTML);
   };
 
   return (
