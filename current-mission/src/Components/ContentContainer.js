@@ -18,13 +18,16 @@ const handleClick = (e) => {
 
 function ContentContainer({ handleKeyup }, ref) {
   return (
-    <StyledContentContainer
-      ref={ref}
-      className="editor__content-container"
-      contentEditable="true"
-      onKeyUp={handleKeyup}
-      onClick={handleClick}
-    ></StyledContentContainer>
+    <div>
+      <h3>Editing Area</h3>
+      <StyledContentContainer
+        ref={ref}
+        className="editor__content-container"
+        contentEditable="true"
+        onKeyUp={handleKeyup}
+        onClick={handleClick}
+      ></StyledContentContainer>
+    </div>
   );
 }
 

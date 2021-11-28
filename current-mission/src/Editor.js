@@ -10,9 +10,14 @@ import {
 } from './commands/commandsUtils';
 import { isValidImageFileType } from './utils/uploadImageUtils';
 import HiddenInputArea from './Components/HiddenInputArea';
+import {
+  RenderingResultContainer,
+  HTMLResultContainer,
+} from './Components/resultContainers';
 
 function Editor() {
   const hiddenInputRef = useRef(null);
+  const renderingResultRef = useRef(null);
   const contentContainerRef = useRef(null);
   const [HTMLResult, setHTMLResult] = useState('');
   const [activatedCommands, setActivatedCommands] = useState([]);
@@ -42,6 +47,8 @@ function Editor() {
       contentContainerRef.current.appendChild(image);
     }
     setHTMLResult(contentContainerRef.current.innerHTML);
+    renderingResultRef.current.innerHTML =
+      contentContainerRef.current.innerHTML;
   };
 
   return (
@@ -56,6 +63,8 @@ function Editor() {
           execute(command);
           handleActivatedCommandState();
           setHTMLResult(contentContainerRef.current.innerHTML);
+          renderingResultRef.current.innerHTML =
+            contentContainerRef.current.innerHTML;
         }}
       />
       <DocumentElementCommandsToolbar
@@ -65,18 +74,30 @@ function Editor() {
 
           execute(command, hiddenInputRef.current);
           setHTMLResult(contentContainerRef.current.innerHTML);
+          renderingResultRef.current.innerHTML =
+            contentContainerRef.current.innerHTML;
         }}
       />
-      <ContentContainer
-        ref={contentContainerRef}
-        handleKeyup={() => {
-          handleActivatedCommandState();
-          setHTMLResult(contentContainerRef.current.innerHTML);
-        }}
-      />
+      <section
+        className="editor__container-section"
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}
+      >
+        <ContentContainer
+          ref={contentContainerRef}
+          handleKeyup={() => {
+            handleActivatedCommandState();
+            setHTMLResult(contentContainerRef.current.innerHTML);
+            renderingResultRef.current.innerHTML =
+              contentContainerRef.current.innerHTML;
+          }}
+        />
+        <RenderingResultContainer
+          HTMLResult={HTMLResult}
+          ref={renderingResultRef}
+        />
+        <HTMLResultContainer HTMLResult={HTMLResult} />
+      </section>
       <HiddenInputArea onChange={onUploadImage} ref={hiddenInputRef} />
-      <h3>HTML Result</h3>
-      <div>{HTMLResult}</div>
     </div>
   );
 }
