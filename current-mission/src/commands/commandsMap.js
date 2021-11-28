@@ -8,6 +8,7 @@ import {
   thirdHalfCommand,
   plainTextCommand,
 } from './textPropertyCommands';
+import { insertImageCommand } from './documentCommands/insertImageCommand';
 
 export const textPropertyCommandsMap = {
   bold: boldCommand,
@@ -18,6 +19,10 @@ export const textPropertyCommandsMap = {
   secondHalf: secondHalfCommand,
   thirdHalf: thirdHalfCommand,
   plainText: plainTextCommand,
+};
+
+export const documentElementCommandsMap = {
+  image: insertImageCommand,
 };
 
 export const textPropertyCommandsValuesMap = {
@@ -31,24 +36,16 @@ export const textPropertyCommandsValuesMap = {
   plainText: '강조 취소',
 };
 
-const insertImageCommand = () => {
-  console.log('insertImage');
-}
-
-export const documentElementCommandsMap = {
-  'image': insertImageCommand,
-};
-
 export const documentElementCommandsValuesMap = {
-  'image': '이미지'
+  image: '이미지',
 };
 
 export const EntireCommandsMap = {
   textProperty: textPropertyCommandsMap,
-  documentElement: documentElementCommandsMap
+  documentElement: documentElementCommandsMap,
 };
 
 export const EntireCommandsValuesMap = {
   textProperty: textPropertyCommandsValuesMap,
-  documentElement: documentElementCommandsValuesMap
+  documentElement: documentElementCommandsValuesMap,
 };
