@@ -1,19 +1,10 @@
 import React, { useState, useRef } from 'react';
+import * as Containers from './Components/containers';
+import * as CommandUtills from './commands/commandsUtils';
+import HiddenInputArea from './Components/HiddenInputArea';
+import { isValidImageFileType } from './utils/uploadImageUtils';
 import TextPropertyCommandsToolbar from './Components/toolbars/TextPropertyCommandsToolbar';
 import DocumentElementCommandsToolbar from './Components/toolbars/DocumentElementCommandsToolbar';
-import {
-  textPropertyCommands,
-  documentElementCommands,
-  getCommandCategory,
-  getCommandsMap,
-} from './commands/commandsUtils';
-import { isValidImageFileType } from './utils/uploadImageUtils';
-import HiddenInputArea from './Components/HiddenInputArea';
-import {
-  RenderingResultContainer,
-  HTMLResultContainer,
-  ContentContainer,
-} from './Components/containers';
 
 function Editor() {
   const hiddenInputRef = useRef(null);
@@ -23,15 +14,15 @@ function Editor() {
   const [activatedCommands, setActivatedCommands] = useState([]);
 
   const execute = (command, target = null) => {
-    const commandCategory = getCommandCategory(command);
-    const commandsMap = getCommandsMap(commandCategory);
+    const commandCategory = CommandUtills.getCommandCategory(command);
+    const commandsMap = CommandUtills.getCommandsMap(commandCategory);
 
     target ? commandsMap[command](target) : commandsMap[command]();
   };
 
   const handleActivatedCommandState = () => {
-    const currentCommand = textPropertyCommands.filter((command) =>
-      document.queryCommandState(command),
+    const currentCommand = CommandUtills.textPropertyCommands.filter(
+      (command) => document.queryCommandState(command),
     );
 
     setActivatedCommands(currentCommand);
@@ -55,7 +46,7 @@ function Editor() {
     <div className="editor">
       <h1>Simple Editor</h1>
       <TextPropertyCommandsToolbar
-        commands={textPropertyCommands}
+        commands={CommandUtills.textPropertyCommands}
         activatedCommands={activatedCommands}
         handleClick={(e) => {
           const { command } = e.target.dataset;
@@ -68,7 +59,7 @@ function Editor() {
         }}
       />
       <DocumentElementCommandsToolbar
-        commands={documentElementCommands}
+        commands={CommandUtills.documentElementCommands}
         handleClick={(e) => {
           const { command } = e.target.dataset;
 
@@ -82,7 +73,7 @@ function Editor() {
         className="editor__container-section"
         style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}
       >
-        <ContentContainer
+        <Containers.ContentContainer
           ref={contentContainerRef}
           handleKeyup={() => {
             handleActivatedCommandState();
@@ -91,11 +82,11 @@ function Editor() {
               contentContainerRef.current.innerHTML;
           }}
         />
-        <RenderingResultContainer
+        <Containers.RenderingResultContainer
           HTMLResult={HTMLResult}
           ref={renderingResultRef}
         />
-        <HTMLResultContainer HTMLResult={HTMLResult} />
+        <Containers.HTMLResultContainer HTMLResult={HTMLResult} />
       </section>
       <HiddenInputArea onChange={onUploadImage} ref={hiddenInputRef} />
     </div>
