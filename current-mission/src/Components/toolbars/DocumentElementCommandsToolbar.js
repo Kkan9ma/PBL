@@ -1,6 +1,5 @@
 import React from 'react';
 import DocumentElementCommandsButtonList from '../commandButtonLists/DocumentElementCommandsButtonList.js';
-// import DocumentElementCommandsButtonList from '../DocumentElementCommandsButtonList';
 import { StyledDefaultToolbar } from './style.js';
 
 function DocumentElementCommandsToolbar({ commands, handleClick }) {
