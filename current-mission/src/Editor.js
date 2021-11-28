@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import ContentContainer from './Components/ContentContainer';
 import TextPropertyCommandsToolbar from './Components/toolbars/TextPropertyCommandsToolbar';
 import DocumentElementCommandsToolbar from './Components/toolbars/DocumentElementCommandsToolbar';
 import {
@@ -13,7 +12,8 @@ import HiddenInputArea from './Components/HiddenInputArea';
 import {
   RenderingResultContainer,
   HTMLResultContainer,
-} from './Components/resultContainers';
+  ContentContainer,
+} from './Components/containers';
 
 function Editor() {
   const hiddenInputRef = useRef(null);
