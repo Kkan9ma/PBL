@@ -1,6 +1,6 @@
 import React from 'react';
-import { getCommandValue } from '../commands/commandsUtils';
-import DocumentElementCommandsButton from './DocumentElementCommandButton';
+import { getCommandValue } from '../../commands/commandsUtils';
+import DocumentElementCommandsButton from '../commandButtons/DocumentElementCommandButton';
 
 function DocumentElementCommandsButtonList({ commands, handleClick }) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import { getCommandValue } from '../commands/commandsUtils';
-import TextPropertyCommandButton from './TextPropertyCommandButton';
+import { getCommandValue } from '../../commands/commandsUtils';
+import TextPropertyCommandButton from '../commandButtons/TextPropertyCommandButton';
 
 function TextPropertyCommandsButtonList({
   commands,

@@ -1,11 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import TextPropertyCommandsButtonList from '../TextPropertyCommandsButtonList';
-
-const StyledDefaultToolbar = styled.ul`
-  margin: 0px;
-  padding: 0px;
-`;
+import TextPropertyCommandsButtonList from '../commandButtonLists/TextPropertyCommandsButtonList';
+import { StyledDefaultToolbar } from './style.js';
 
 function TextPropertyCommandsToolbar({
   commands,

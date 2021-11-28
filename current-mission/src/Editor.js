@@ -1,15 +1,15 @@
 import React, { useState, useRef } from 'react';
 import ContentContainer from './Components/ContentContainer';
-import TextPropertyCommandsToolbar from './Components/Toolbar/TextPropertyCommandsToolbar';
-import DocumentElementCommandsToolbar from './Components/Toolbar/DocumentElementCommandsToolbar';
+import TextPropertyCommandsToolbar from './Components/toolbars/TextPropertyCommandsToolbar';
+import DocumentElementCommandsToolbar from './Components/toolbars/DocumentElementCommandsToolbar';
 import {
   textPropertyCommands,
   documentElementCommands,
   getCommandCategory,
   getCommandsMap,
 } from './commands/commandsUtils';
-import HiddenInputArea from './HiddenInputArea';
 import { isValidImageFileType } from './utils/uploadImageUtils';
+import HiddenInputArea from './Components/HiddenInputArea';
 
 function Editor() {
   const hiddenInputRef = useRef(null);

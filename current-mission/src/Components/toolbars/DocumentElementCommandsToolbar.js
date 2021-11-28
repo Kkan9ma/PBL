@@ -1,11 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import DocumentElementCommandsButtonList from '../DocumentElementCommandsButtonList';
-
-const StyledDefaultToolbar = styled.ul`
-  margin: 0px;
-  padding: 0px;
-`;
+import DocumentElementCommandsButtonList from '../commandButtonLists/DocumentElementCommandsButtonList.js';
+// import DocumentElementCommandsButtonList from '../DocumentElementCommandsButtonList';
+import { StyledDefaultToolbar } from './style.js';
 
 function DocumentElementCommandsToolbar({ commands, handleClick }) {
   return (
