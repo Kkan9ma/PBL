@@ -1,5 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 import { adjustImageTagSize } from '../utils/handleTagElement';
+
+const StyledContentContainer = styled.div`
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+`;
 
 const handleClick = (e) => {
   const { target } = e;
@@ -11,14 +18,13 @@ const handleClick = (e) => {
 
 function ContentContainer({ handleKeyup }, ref) {
   return (
-    <div
+    <StyledContentContainer
       ref={ref}
       className="editor__content-container"
-      style={{ width: '500px', height: '500px', border: '1px solid black' }}
       contentEditable="true"
       onKeyUp={handleKeyup}
       onClick={handleClick}
-    ></div>
+    ></StyledContentContainer>
   );
 }
 

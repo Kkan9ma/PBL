@@ -1,5 +1,6 @@
 import React from 'react';
-import TextPropertyCommandsButtonList from '../TextPropertyCommandsButtonList';
+import TextPropertyCommandsButtonList from '../commandButtonLists/TextPropertyCommandsButtonList';
+import { StyledDefaultToolbar } from './style.js';
 
 function TextPropertyCommandsToolbar({
   commands,
@@ -7,17 +8,16 @@ function TextPropertyCommandsToolbar({
   handleClick,
 }) {
   return (
-    <ul
+    <StyledDefaultToolbar
       className="editor__toolbar"
       data-toolbar="text-property-commands"
-      style={{ margin: '0', padding: '0' }}
     >
       <TextPropertyCommandsButtonList
         commands={commands}
         activatedCommands={activatedCommands}
         handleClick={handleClick}
       />
-    </ul>
+    </StyledDefaultToolbar>
   );
 }
 
