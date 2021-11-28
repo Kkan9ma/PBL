@@ -1,12 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import { adjustImageTagSize } from '../utils/handleTagElement';
-
-const StyledContentContainer = styled.div`
-  width: 500px;
-  height: 500px;
-  border: 1px solid black;
-`;
+import { adjustImageTagSize } from '../../utils/handleTagElement';
+import { StyledContentContainer } from './style';
 
 const handleClick = (e) => {
   const { target } = e;

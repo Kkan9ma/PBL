@@ -1,10 +1,13 @@
 import React from 'react';
+import { StyledContentContainer } from './style';
 
 function RenderingResultContainer({ HTMLResult }, ref) {
   return (
     <div>
       <h3>Result</h3>
-      <div ref={ref}>{HTMLResult}</div>
+      <StyledContentContainer>
+        <div ref={ref}>{HTMLResult}</div>
+      </StyledContentContainer>
     </div>
   );
 }
