@@ -1,21 +1,28 @@
 import NoteContainer from "./NoteContainer";
 
-function CarltonNote({ $target }) {
+function CarltonNote({ $target, commandsList }) {
   const $carltonNote = document.createElement('section');
 
   $carltonNote.id = 'carlton-note';
 
   this.$target = $target;
   this.$target.appendChild($carltonNote);
-  $carltonNote.innerText = 'carltonNote';
+  this.state = {
+    commandsList: !commandsList ? [] : commandsList,
+  };
 
-  this.noteContainer = new NoteContainer({ $target: $carltonNote });
+  this.noteContainer = new NoteContainer({
+    $target: $carltonNote,
+    commandsList: this.state.commandsList
+  });
 
   this.render = () => {
     this.noteContainer.render();
   }
 
   this.init = () => {
+    this.state.commandsList = commandsList;
+
     this.render();
   }
 
