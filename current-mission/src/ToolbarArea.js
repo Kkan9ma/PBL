@@ -35,4 +35,6 @@ export default function ToolbarArea({
   this.render = () => {
     this.textCommandButtonGroup.render();
   };
+
+  this.render();
 }

@@ -5,6 +5,10 @@ const styles = {
   minWidth: '300px',
 };
 
+const executeTextCommand = (command) => {
+  console.log(command);
+}
+
 export default function NoteContainer({ $target, commandsList }) {
   const $noteContainer = document.createElement('div');
 
@@ -17,6 +21,7 @@ export default function NoteContainer({ $target, commandsList }) {
   this.toolbar = new ToolbarArea({
     $target: $noteContainer,
     commandsList: this.commandsList,
+    executeTextCommand,
   })
 
   this.contentEditingArea = new ContentEditingArea({
