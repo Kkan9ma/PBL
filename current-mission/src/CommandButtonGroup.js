@@ -7,7 +7,7 @@ const styles = {
   padding: '0',
 };
 
-export default function CommandButtonGroup({ $target, commandsList, action }) {
+export default function CommandButtonGroup({ $target, commandsList, action, executeTextCommand }) {
   const $buttonGroup = document.createElement('ul');
 
   $buttonGroup.className = `note-button-group ${action}`;
@@ -46,5 +46,28 @@ export default function CommandButtonGroup({ $target, commandsList, action }) {
     this.target.appendChild($buttonGroup);
   };
 
+  this.handleClick = (event) => {
+    if (event.target.tagName === 'UL') {
+      return;
+    }
+
+    const { target } = event;
+    const button = target.closest('button') ?? target.querySelector('button');
+    const { actionType } = button.dataset;
+    const { command } = button.dataset;
+
+    if (actionType === 'text-command') {
+      executeTextCommand(command);
+    }
+  };
+
+
+  this.bindEvents = () => {
+    $buttonGroup.addEventListener('click', (event) => {
+      this.handleClick(event);
+    });
+  };
+
   this.render();
+  this.bindEvents();
 }
