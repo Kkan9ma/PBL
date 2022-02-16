@@ -88,6 +88,35 @@ export function getSelectedNodes() {
   return [];
 }
 
+export function getParent(tagName, range) {
+  let ret;
+
+  ret = range.commonAncestorContainer;
+
+  while (ret && ret.tagName !== tagName) {
+    ret = ret.parentNode;
+  }
+  return ret;
+}
+
+export function removeEmptyElements(nodeList) {
+  Array.from(nodeList).forEach((element) => {
+    if (element.textContent === '') {
+      element.remove();
+    }
+  })
+}
+
+export function removeNestedSpans($target) {
+  Array.from($target.querySelectorAll('span')).forEach((element) => {
+    const childSpan = element.querySelector('span');
+
+    if (childSpan) {
+      element.innerHTML = childSpan.innerHTML;
+    }
+  });
+}
+
 export function $($target, scope = document) {
   return scope.querySelector($target);
 }
