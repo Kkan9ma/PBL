@@ -1,4 +1,5 @@
-import { getNodesInRange } from "./dom";
+import { $, getNodesInRange, getSelectedNodes, isDescendant, isTextNode } from "./dom";
+import { surroundSelectedRange } from "./selection";
 import { textCommandTagMap } from "./settings";
 
 export function executeTextCommand(command) {
@@ -14,21 +15,26 @@ export function executeTextCommand(command) {
     return;
   }
 
-  const isApplied = getNodesInRange(range.cloneRange()).some((element) => {
-    if (
-      element.nodeType !== 3 && // Element: not text type node
+  const rangeNodes = getNodesInRange(range.cloneRange());
+  const [oldTag, newTag] = textCommandTagMap[command];
+
+  const isApplied = rangeNodes.some((element) => {
+    if (textCommandTagMap[command].some((tag) => tag === element.tagName)) {
+      return true;
+    } else if (
+      !isTextNode(element) &&
       element.className !== 'carlton-content-editing-area' && // Element: not 'editing area element'
-      !element.querySelector('.carlton-content-editing-area') && // Element: not element above of 'editing area element'
-      (element.querySelector(textCommandTagMap[command][0].toLowerCase()) || // Element: Have another element below that means text emphasis
-        element.querySelector(textCommandTagMap[command][1].toLowerCase())) &&
+      !element.contains($('.carlton-content-editing-area')) && // Element: not element above of 'editing area element'
+      (element.contains($(oldTag.toLowerCase())) || element.contains($(newTag.toLowerCase()))) &&  // Element: Have another element below that means text emphasis
       element.tagName !== 'DIV'
     ) {
-      return true;
-    } else if (textCommandTagMap[command].some((tag) => tag === element.tagName)) {
       return true;
     }
     return false;
   });
 
-  console.log(isApplied);
+  if (isApplied) {
+    return;
+  }
+  surroundSelectedRange(selection, newTag)
 }

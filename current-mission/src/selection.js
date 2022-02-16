@@ -1,0 +1,88 @@
+import { getSelectedNodes } from "./dom";
+
+export function surroundSelectedRange(selection, tag) {
+  const selectedNodes = getSelectedNodes();
+
+  let flag = true;
+  let startOffset;
+  let endOffset;
+  let startContainer;
+  let endContainer;
+  let lastEndOffset;
+  let lastEndContainer;
+
+  for (let i = 0; i < selectedNodes.length; i++) {
+    document.querySelector('.carlton-content-editing-area').normalize();
+
+    if (i === 0) {
+      // 첫 node의 경우
+      if (selectedNodes[0] === selection.anchorNode) {
+        startOffset = selection.anchorOffset;
+        startContainer = selection.anchorNode;
+        lastEndOffset = selection.focusOffset;
+        lastEndContainer = selection.focusNode;
+      } else {
+        startOffset = selection.focusOffset;
+        startContainer = selection.focusNode;
+        lastEndOffset = selection.anchorOffset;
+        lastEndContainer = selection.anchorNode;
+      }
+    } else if (flag === false && i !== 0 &&
+      // (selectedNodes[i].nodeType === 1 && selectedNodes.tagName !== 'DIV') &&
+      // selectedNodes[i].nodeValue && // To ignore whitespace text node.
+      selectedNodes[i].textContent.length > 0
+    ) {
+      // 첫/마지막 node가 아닌 경우 && div를 만난 적 없는 경우
+      flag = true;
+      startOffset = 0;
+      startContainer = selectedNodes[i];
+    }
+    // if (i === 0 && i === selectedNodes.length - 1) {
+    if (i === selectedNodes.length - 1) { // 마지막 node
+      endOffset = lastEndOffset;
+      endContainer = lastEndContainer;
+      flag = false;
+    } else if (flag === true && i !== selectedNodes.length - 1 && i !== 0) {
+      // 구분자 DIV를 중심으로 나누고, DIV 이전 노드까지를 endContainer로 삼아 한 블록을 완성
+      if (
+        selectedNodes[i].nodeType === 1 &&
+        selectedNodes[i].tagName === 'DIV' &&
+        selectedNodes[i - 1].nodeValue && // To ignore whitespace text node.
+        selectedNodes[i - 1].textContent.length > 0
+      ) {
+        flag = false;
+        endOffset = selectedNodes[i - 1].textContent.length;
+        endContainer = selectedNodes[i - 1];
+      }
+    }
+
+    if (startContainer && endContainer) {
+      // 1. selection direction: from Right to Left
+      if (startContainer === endContainer && startOffset > endOffset) {
+        const temp = startOffset;
+
+        startOffset = endOffset;
+        endOffset = temp;
+      }
+
+      const newRange = document.createRange();
+
+      newRange.setStart(startContainer, startOffset);
+      newRange.setEnd(endContainer, endOffset);
+
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(newRange);
+
+      const newElement = document.createElement(tag.toLowerCase());
+
+      newElement.append(newRange.extractContents());
+      newRange.insertNode(newElement);
+
+      startOffset = null;
+      endOffset = null;
+      startContainer = null;
+      endContainer = null;
+      window.getSelection().removeAllRanges();
+    }
+  }
+}
