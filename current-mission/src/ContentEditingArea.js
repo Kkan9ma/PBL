@@ -1,3 +1,6 @@
+import { executeTextCommand } from "./executeTextCommand";
+import { commandKeyMap } from "./settings";
+
 const styles = {
   height: '1000px',
   border: '1px solid rgba(0,0,0,0.3)',
@@ -22,4 +25,41 @@ export default function ContentEditingArea({ $target, commandsList }) {
   this.render = () => {
     $contentEditingArea.innerHTML = '';
   };
+
+  this.handleShortcutInput = (event) => {
+    if (event.code === 'KeyS' && event.shiftKey && !event.altKey) { // strikethrough
+      event.preventDefault();
+      executeTextCommand(commandKeyMap[event.code]);
+      return;
+    }
+    if (event.altKey || event.shiftKey) {
+      return;
+    }
+    if (Object.keys(commandKeyMap).includes(event.code)) { // bold, italic, underline
+      event.preventDefault();
+      executeTextCommand(commandKeyMap[event.code]);
+    }
+  }
+
+  this.handleKeydown = (event) => {
+    if (!event.ctrlKey && !event.metaKey) { // window: ctrl, macOS: CMD
+      return;
+    }
+    if (Object.keys(commandKeyMap).includes(event.code)) { // bold, italic, underline
+      this.handleShortcutInput(event);
+    }
+  }
+
+  this.bindEvents = () => {
+    $contentEditingArea.addEventListener('keydown', (event) => {
+      this.handleKeydown(event);
+    })
+  }
+
+  this.init = () => {
+    this.render();
+    this.bindEvents();
+  }
+
+  this.init();
 }

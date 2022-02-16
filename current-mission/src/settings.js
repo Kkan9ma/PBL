@@ -4,3 +4,10 @@ export const textCommandTagMap = {
   strikethrough: ['STRIKE', 'S'],
   underline: ['U', 'U'],
 };
+
+export const commandKeyMap = {
+  KeyB: 'bold',
+  KeyI: 'italic',
+  KeyS: 'strikethrough',
+  KeyU: 'underline'
+}
