@@ -1,5 +1,5 @@
 import { $, getNodesInRange, getSelectedNodes, isDescendant, isTextNode } from "./dom";
-import { surroundSelectedRange } from "./selection";
+import { removeAppliedTagOnRange, surroundSelectedRange } from "./selection";
 import { textCommandTagMap } from "./settings";
 
 export function executeTextCommand(command) {
@@ -34,7 +34,9 @@ export function executeTextCommand(command) {
   });
 
   if (isApplied) {
+    removeAppliedTagOnRange(range, [oldTag, newTag]);
     return;
-  }
+  };
+
   surroundSelectedRange(selection, newTag)
 }

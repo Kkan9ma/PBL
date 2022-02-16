@@ -1,4 +1,4 @@
-import { getSelectedNodes } from "./dom";
+import { $, getParent, getSelectedNodes, removeEmptyElements, removeNestedSpans } from "./dom";
 
 export function surroundSelectedRange(selection, tag) {
   const selectedNodes = getSelectedNodes();
@@ -85,4 +85,80 @@ export function surroundSelectedRange(selection, tag) {
       window.getSelection().removeAllRanges();
     }
   }
+}
+
+export function removeAppliedTagOnRange(range, tags) {
+  const contents = range.cloneContents();
+
+  tags.forEach((tag) => {
+    const elements = contents.querySelectorAll(tag.toLowerCase());
+
+    // 특정 tag가 선택한 영역에 있다, 단 다른 태그도 섞여 있는 경우.
+    if (elements.length > 0) {
+      elements.forEach((element) => {
+        const fragment = range.createContextualFragment(element.innerHTML);
+
+        element.replaceWith(fragment);
+      });
+      range.deleteContents();
+      range.insertNode(contents);
+    } else {
+      // 선택한 영역에 원하는 tag가 있다.
+      // 모두 선택한 tag의 강조 표시로 되어 있다. ex) <strong>123</strong>
+
+      const newElement = document.createElement('span');
+      const parent = getParent(tag.toUpperCase(), range);
+
+      if (!parent) {
+        return;
+      }
+
+      newElement.appendChild(range.extractContents());
+      range.insertNode(newElement);
+
+      const newFragment = document.createDocumentFragment();
+
+      parent.childNodes.forEach((childNode) => {
+        if (childNode.tagName === 'SPAN') {
+          // remove nested span in fragment 
+          /* ex) 
+            <span>
+              <span>
+                <span></span>
+              </span>
+            </span>
+          */
+          const tempFragment = document.createDocumentFragment();
+          const fragmentContents = range.createContextualFragment(childNode.innerHTML);
+
+          tempFragment.append(fragmentContents);
+          newFragment.append(tempFragment);
+        } else {
+          // remove nested tags 
+          const temp = document.createElement(tag.toLowerCase());
+          if (childNode.innerHTML) {
+            temp.innerHTML = childNode.innerHTML;
+          } else {
+            temp.innerHTML = childNode.textContent;
+          }
+          newFragment.appendChild(temp);
+        }
+      });
+
+      Array.from(newFragment.children).forEach((element) => {
+        if (element.textContent === '') {
+          element.remove();
+        }
+      });
+      removeEmptyElements(newFragment.children);
+
+      range.commonAncestorContainer.replaceWith(newFragment);
+    }
+    range.collapse();
+
+    removeEmptyElements($('.carlton-content-editing-area').querySelectorAll('*'));
+    removeNestedSpans($('.carlton-content-editing-area'));
+  });
+
+  document.querySelector('.carlton-content-editing-area').normalize();
 }
