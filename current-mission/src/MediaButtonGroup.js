@@ -2,6 +2,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 import ColorPalette from './ColorPalette';
 import { icons } from './icons/commandButtons';
 import { fontColorMap } from './settings';
+import { toggleFontColorPaletteDisplay } from './utils';
 
 const styles = {
   listStyle: 'none',
@@ -30,7 +31,7 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
         ${this.commandsList ? this.commandsList
         .map(
           (command) => `
-              <li class='note-button-container' style='display: inline-block'>
+              <li class='note-button-container ${command}' style='display: inline-block'>
                 <button 
                   class='note-command-button'
                   data-command=${command}
@@ -55,6 +56,10 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
     this.colorPalette.render();
   };
 
+  this.handleClickFontColor = () => {
+    toggleFontColorPaletteDisplay();
+  }
+
   this.handleClick = (event) => {
     if (event.target.tagName === 'UL') {
       return;
@@ -65,7 +70,9 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
     const { actionType } = button.dataset;
     const { command } = button.dataset;
 
-    console.log(actionType, command);
+    if (command === 'fontColor') {
+      this.handleClickFontColor(event);
+    }
   };
 
 
