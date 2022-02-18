@@ -5,6 +5,7 @@ const styles = {
   listStyle: 'none',
   margin: '0 20px 0 0 ',
   padding: '0',
+  userSelect: 'none'
 };
 
 export default function CommandButtonGroup({ $target, commandsList, action, executeTextCommand }) {
