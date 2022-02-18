@@ -1,4 +1,5 @@
 import CommandButtonGroup from './CommandButtonGroup';
+import MediaButtonGroup from './MediaButtonGroup';
 
 const styles = {
   backgroundColor: '#f5f5f5',
@@ -28,12 +29,20 @@ export default function ToolbarArea({
     executeTextCommand,
   });
 
+  this.mediaButtonGroup = new MediaButtonGroup({
+    $target: $toolbarArea,
+    commandsList: this.commandsList['media'],
+    action: 'media-command',
+    executeTextCommand,
+  });
+
   for (const style in styles) {
     $toolbarArea.style[style] = styles[style];
   }
 
   this.render = () => {
     this.textCommandButtonGroup.render();
+    this.mediaButtonGroup.render();
   };
 
   this.render();

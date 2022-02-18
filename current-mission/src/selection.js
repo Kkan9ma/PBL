@@ -1,6 +1,6 @@
 import { $, getParent, getSelectedNodes, removeEmptyElements, removeNestedSpans } from "./dom";
 
-export function surroundSelectedRange(selection, tag) {
+export function surroundSelectedRange(selection, element, styleOption = false) {
   const selectedNodes = getSelectedNodes();
 
   let flag = true;
@@ -73,8 +73,13 @@ export function surroundSelectedRange(selection, tag) {
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(newRange);
 
-      const newElement = document.createElement(tag.toLowerCase());
+      const newElement = document.createElement(element.tagName.toLowerCase());
 
+      if (styleOption) {
+        Array.from(element.style).forEach((styleType, index) => {
+          newElement.style[styleType] = element.style[element.style[index]];
+        })
+      }
       newElement.append(newRange.extractContents());
       newRange.insertNode(newElement);
 
