@@ -6,7 +6,7 @@ export default function ColorPalette({ $target, fontColorMap }) {
   $colorPalette.className = 'note-font-color-palette palette';
   this.target = $target;
   this.state = {
-    colors: fontColorMap ? fontColorMap : [],
+    colors: fontColorMap,
   }
 
   this.onColorText = (event) => {

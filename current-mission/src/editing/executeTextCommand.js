@@ -21,7 +21,8 @@ export function executeTextCommand(command) {
   const isApplied = rangeNodes.some((element) => {
     if (textCommandTagMap[command].some((tag) => tag === element.tagName)) {
       return true;
-    } else if (
+    }
+    if (
       !isTextNode(element) &&
       element.className !== 'carlton-content-editing-area' && // Element: not 'editing area element'
       !element.contains($('.carlton-content-editing-area')) && // Element: not element above of 'editing area element'
@@ -36,7 +37,7 @@ export function executeTextCommand(command) {
   if (isApplied) {
     removeAppliedTagOnRange(range, [oldTag, newTag]);
     return;
-  };
+  }
 
   surroundSelectedRange(selection, document.createElement(newTag))
 }

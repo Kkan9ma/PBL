@@ -1,6 +1,7 @@
 // .eslintrc.js
 module.exports = {
-  extends: ['react-app', 'airbnb', 'prettier'],
+  extends: ['airbnb', 'prettier'],
+  // extends: ['react-app', 'airbnb', 'prettier'],
   rules: {
     // Override rules or Add more rules
     'react/prefer-stateless-function': 0,
@@ -12,7 +13,7 @@ module.exports = {
     sourceType: 'module',
     requireConfigFile: false,
     babelOptions: {
-      presets: ['@babel/preset-react'],
+      // presets: ['@babel/preset-react'],
     },
   },
 };

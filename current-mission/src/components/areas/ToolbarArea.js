@@ -16,14 +16,14 @@ export default function ToolbarArea({
 
   this.textCommandButtonGroup = new CommandButtonGroup({
     $target: $toolbarArea,
-    commandsList: this.commandsList['text'],
+    commandsList: this.commandsList.text,
     action: 'text-command',
     executeTextCommand,
   });
 
   this.mediaButtonGroup = new MediaButtonGroup({
     $target: $toolbarArea,
-    commandsList: this.commandsList['media'],
+    commandsList: this.commandsList.media,
     action: 'media-command',
     executeTextCommand,
   });

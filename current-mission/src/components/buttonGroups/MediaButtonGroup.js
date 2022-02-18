@@ -5,7 +5,7 @@ import { toggleFontColorPaletteDisplay } from '../../lib/utils';
 import { commandButtonIcons, fontColorMap } from '../../settings';
 import { $ } from '../../lib/dom';
 
-export default function MediaButtonGroup({ $target, commandsList, action, executeTextCommand }) {
+export default function MediaButtonGroup({ $target, commandsList, action }) {
   const $buttonGroup = document.createElement('ul');
 
   $buttonGroup.className = `note-button-group ${action}`;
@@ -14,7 +14,7 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
 
   this.colorPalette = new ColorPalette({
     $target: $buttonGroup,
-    fontColorMap: fontColorMap
+    fontColorMap
   })
 
   this.hiddenImageInput = new HiddenImageInput({

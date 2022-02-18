@@ -1,6 +1,6 @@
-import ContentEditingArea from "../components/areas/ContentEditingArea";
-import ToolbarArea from "../components/areas/ToolbarArea";
-import { executeTextCommand } from "../editing/executeTextCommand";
+import ContentEditingArea from './areas/ContentEditingArea';
+import ToolbarArea from './areas/ToolbarArea';
+import { executeTextCommand } from '../editing/executeTextCommand';
 
 
 export default function NoteContainer({ $target, commandsList }) {
