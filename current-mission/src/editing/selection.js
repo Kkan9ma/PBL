@@ -1,4 +1,4 @@
-import { $, getParent, getSelectedNodes, removeEmptyElements, removeNestedSpans } from "./dom";
+import { $, getParent, getSelectedNodes, removeEmptyElements, removeNestedSpans } from "../lib/dom";
 
 export function surroundSelectedRange(selection, element, styleOption = false) {
   const selectedNodes = getSelectedNodes();

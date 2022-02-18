@@ -1,17 +1,9 @@
 import '@fortawesome/fontawesome-free/js/all.js';
-import ColorPalette from './ColorPalette';
-import { $ } from './dom';
-import HiddenImageInput from './HiddenImageInput';
-import { icons } from './icons/commandButtons';
-import { fontColorMap } from './settings';
-import { toggleFontColorPaletteDisplay } from './utils';
-
-const styles = {
-  listStyle: 'none',
-  margin: '0 20px 0 0 ',
-  padding: '0',
-  userSelect: 'none'
-};
+import HiddenImageInput from '../HiddenImageInput';
+import ColorPalette from '../ColorPalette';
+import { toggleFontColorPaletteDisplay } from '../../lib/utils';
+import { commandButtonIcons, fontColorMap } from '../../settings';
+import { $ } from '../../lib/dom';
 
 export default function MediaButtonGroup({ $target, commandsList, action, executeTextCommand }) {
   const $buttonGroup = document.createElement('ul');
@@ -19,10 +11,6 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
   $buttonGroup.className = `note-button-group ${action}`;
   this.target = $target;
   this.commandsList = commandsList;
-
-  for (const style in styles) {
-    $buttonGroup.style[style] = styles[style];
-  }
 
   this.colorPalette = new ColorPalette({
     $target: $buttonGroup,
@@ -38,20 +26,13 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
         ${this.commandsList ? this.commandsList
         .map(
           (command) => `
-              <li class='note-button-container ${command}' style='display: inline-block'>
+              <li class='note-button-container ${command}'>
                 <button 
                   class='note-command-button'
                   data-command=${command}
                   data-action-type=${action}
-                  style='
-                    border-width: 1px; 
-                    border-radius: 2px;
-                    padding: 6px 9px;
-                    border-color: #ccc;
-                    background-color: #fff
-                  '
                 >
-                  ${icons[command]}
+                  ${commandButtonIcons[command]}
                 </button>
               </li>
             `
@@ -82,7 +63,6 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
 
     const { target } = event;
     const button = target.closest('button') ?? target.querySelector('button');
-    const { actionType } = button.dataset;
     const { command } = button.dataset;
 
     if (command === 'fontColor') {

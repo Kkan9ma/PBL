@@ -1,6 +1,6 @@
-import { $, getNodesInRange, getSelectedNodes, isDescendant, isTextNode } from "./dom";
+import { $, getNodesInRange, isTextNode } from "../lib/dom";
 import { removeAppliedTagOnRange, surroundSelectedRange } from "./selection";
-import { textCommandTagMap } from "./settings";
+import { textCommandTagMap } from "../settings";
 
 export function executeTextCommand(command) {
   const selection = window.getSelection();

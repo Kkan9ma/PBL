@@ -1,4 +1,4 @@
-import NoteContainer from "./NoteContainer";
+import NoteContainer from "./components/NoteContainer";
 
 function CarltonNote({ $target, commandsList }) {
   const $carltonNote = document.createElement('section');
@@ -16,14 +16,8 @@ function CarltonNote({ $target, commandsList }) {
     commandsList: this.state.commandsList
   });
 
-  this.render = () => {
-    this.noteContainer.render();
-  }
-
   this.init = () => {
     this.state.commandsList = commandsList;
-
-    this.render();
   }
 
   this.init();

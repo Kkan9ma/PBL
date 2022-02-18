@@ -1,4 +1,5 @@
 import CarltonNote from './CarltonNote';
+import './styles.css';
 
 new CarltonNote({
   $target: document.querySelector('#root'),

@@ -1,13 +1,5 @@
-import CommandButtonGroup from './CommandButtonGroup';
-import MediaButtonGroup from './MediaButtonGroup';
-
-const styles = {
-  backgroundColor: '#f5f5f5',
-  border: '1px solid rgba(0,0,0,0.3)',
-  borderBottomWidth: '0px',
-  padding: '8px 5px',
-  display: 'flex',
-};
+import CommandButtonGroup from '../buttonGroups/CommandButtonGroup';
+import MediaButtonGroup from '../buttonGroups/MediaButtonGroup';
 
 export default function ToolbarArea({
   $target,
@@ -35,15 +27,4 @@ export default function ToolbarArea({
     action: 'media-command',
     executeTextCommand,
   });
-
-  for (const style in styles) {
-    $toolbarArea.style[style] = styles[style];
-  }
-
-  this.render = () => {
-    this.textCommandButtonGroup.render();
-    this.mediaButtonGroup.render();
-  };
-
-  this.render();
 }

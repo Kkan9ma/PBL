@@ -1,12 +1,5 @@
-import { executeTextCommand } from "./executeTextCommand";
-import { commandKeyMap } from "./settings";
-
-const styles = {
-  height: '1000px',
-  border: '1px solid rgba(0,0,0,0.3)',
-  overflowY: 'auto',
-  padding: '7px',
-};
+import { executeTextCommand } from "../../editing/executeTextCommand";
+import { commandKeyMap } from "../../settings";
 
 export default function ContentEditingArea({ $target, commandsList }) {
   const $contentEditingArea = document.createElement('div');
@@ -17,14 +10,6 @@ export default function ContentEditingArea({ $target, commandsList }) {
   this.target = $target;
   this.commands = commandsList;
   this.target.appendChild($contentEditingArea);
-
-  for (const style in styles) {
-    $contentEditingArea.style[style] = styles[style];
-  }
-
-  this.render = () => {
-    $contentEditingArea.innerHTML = '';
-  };
 
   this.handleShortcutInput = (event) => {
     if (event.code === 'KeyS' && event.shiftKey && !event.altKey) { // strikethrough
@@ -56,10 +41,5 @@ export default function ContentEditingArea({ $target, commandsList }) {
     })
   }
 
-  this.init = () => {
-    this.render();
-    this.bindEvents();
-  }
-
-  this.init();
+  this.bindEvents();
 }

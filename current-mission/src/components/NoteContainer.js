@@ -1,10 +1,6 @@
-import ContentEditingArea from "./ContentEditingArea";
-import ToolbarArea from "./ToolbarArea";
-import { executeTextCommand } from "./executeTextCommand";
-
-const styles = {
-  minWidth: '300px',
-};
+import ContentEditingArea from "../components/areas/ContentEditingArea";
+import ToolbarArea from "../components/areas/ToolbarArea";
+import { executeTextCommand } from "../editing/executeTextCommand";
 
 
 export default function NoteContainer({ $target, commandsList }) {
@@ -26,12 +22,4 @@ export default function NoteContainer({ $target, commandsList }) {
     $target: $noteContainer,
     commandsList,
   });
-
-  for (const style in styles) {
-    $noteContainer.style[style] = styles[style];
-  }
-
-  this.render = () => {
-    this.toolbar.render();
-  };
 }

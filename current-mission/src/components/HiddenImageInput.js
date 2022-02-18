@@ -1,14 +1,12 @@
-import { $ } from "./dom";
-import { imageFileTypes } from "./settings";
-import { createImageElement, validImageFileType } from "./utils";
+import { $ } from "../lib/dom";
+import { imageFileTypes } from "../settings";
+import { createImageElement, validImageFileType } from "../lib/utils";
 
-function HiddenImageInput({ $target }) {
+export default function HiddenImageInput({ $target }) {
   const $hiddenImageInput = document.createElement('input');
 
   $hiddenImageInput.type = 'file';
-  $hiddenImageInput.className = '';
   $hiddenImageInput.accept = imageFileTypes.join(', ');
-  $hiddenImageInput.style.display = 'none';
 
   this.target = $target;
 
@@ -42,8 +40,5 @@ function HiddenImageInput({ $target }) {
       this.onUploadImage(event)
     })
   }
-  this.render();
   this.bindEvents();
 }
-
-export default HiddenImageInput;
