@@ -1,5 +1,7 @@
 import '@fortawesome/fontawesome-free/js/all.js';
 import ColorPalette from './ColorPalette';
+import { $ } from './dom';
+import HiddenImageInput from './HiddenImageInput';
 import { icons } from './icons/commandButtons';
 import { fontColorMap } from './settings';
 import { toggleFontColorPaletteDisplay } from './utils';
@@ -8,6 +10,7 @@ const styles = {
   listStyle: 'none',
   margin: '0 20px 0 0 ',
   padding: '0',
+  userSelect: 'none'
 };
 
 export default function MediaButtonGroup({ $target, commandsList, action, executeTextCommand }) {
@@ -25,6 +28,10 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
     $target: $buttonGroup,
     fontColorMap: fontColorMap
   })
+
+  this.hiddenImageInput = new HiddenImageInput({
+    $target: $buttonGroup
+  });
 
   this.render = () => {
     $buttonGroup.innerHTML = `
@@ -54,10 +61,18 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
     `;
     this.target.appendChild($buttonGroup);
     this.colorPalette.render();
+    this.hiddenImageInput.render();
   };
 
   this.handleClickFontColor = () => {
     toggleFontColorPaletteDisplay();
+  }
+
+  this.handleClickImageUpload = (event) => {
+    const mediaCommandContainer = event.target.closest('ul');
+    const hiddenInput = $('input', mediaCommandContainer);
+
+    hiddenInput.click();
   }
 
   this.handleClick = (event) => {
@@ -72,6 +87,9 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
 
     if (command === 'fontColor') {
       this.handleClickFontColor(event);
+    }
+    if (command === 'uploadImage') {
+      this.handleClickImageUpload(event);
     }
   };
 
