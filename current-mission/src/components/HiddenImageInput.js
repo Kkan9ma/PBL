@@ -6,9 +6,7 @@ export default function HiddenImageInput({ $target }) {
   const $hiddenImageInput = document.createElement('input');
 
   $hiddenImageInput.type = 'file';
-  $hiddenImageInput.className = '';
   $hiddenImageInput.accept = imageFileTypes.join(', ');
-  $hiddenImageInput.style.display = 'none';
 
   this.target = $target;
 
