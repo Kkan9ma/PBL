@@ -1,5 +1,5 @@
 import '@fortawesome/fontawesome-free/js/all.js';
-import { icons } from './icons/commandButtons';
+import { commandButtonIcons } from '../../settings';
 
 const styles = {
   listStyle: 'none',
@@ -10,7 +10,6 @@ const styles = {
 
 export default function CommandButtonGroup({ $target, commandsList, action, executeTextCommand }) {
   const $buttonGroup = document.createElement('ul');
-
   $buttonGroup.className = `note-button-group ${action}`;
   this.target = $target;
   this.commandsList = commandsList;
@@ -37,7 +36,7 @@ export default function CommandButtonGroup({ $target, commandsList, action, exec
                   background-color: #fff
                 '
               >
-                ${icons[command]}
+                ${commandButtonIcons[command]}
               </button>
             </li>
           `

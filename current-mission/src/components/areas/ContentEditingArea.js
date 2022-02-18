@@ -1,5 +1,5 @@
-import { executeTextCommand } from "./executeTextCommand";
-import { commandKeyMap } from "./settings";
+import { executeTextCommand } from "../../editing/executeTextCommand";
+import { commandKeyMap } from "../../settings";
 
 const styles = {
   height: '1000px',

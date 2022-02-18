@@ -1,4 +1,4 @@
-import NoteContainer from "./NoteContainer";
+import NoteContainer from "./components/NoteContainer";
 
 function CarltonNote({ $target, commandsList }) {
   const $carltonNote = document.createElement('section');

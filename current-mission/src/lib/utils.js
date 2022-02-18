@@ -1,5 +1,5 @@
 import { $ } from "./dom";
-import { imageFileTypes } from "./settings";
+import { imageFileTypes } from "../settings";
 
 export function toggleFontColorPaletteDisplay() {
   const palette = $('.note-font-color-palette');

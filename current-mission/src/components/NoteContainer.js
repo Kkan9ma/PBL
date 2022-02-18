@@ -1,11 +1,10 @@
-import ContentEditingArea from "./ContentEditingArea";
-import ToolbarArea from "./ToolbarArea";
-import { executeTextCommand } from "./executeTextCommand";
+import ContentEditingArea from "../components/areas/ContentEditingArea";
+import ToolbarArea from "../components/areas/ToolbarArea";
+import { executeTextCommand } from "../editing/executeTextCommand";
 
 const styles = {
   minWidth: '300px',
 };
-
 
 export default function NoteContainer({ $target, commandsList }) {
   const $noteContainer = document.createElement('div');

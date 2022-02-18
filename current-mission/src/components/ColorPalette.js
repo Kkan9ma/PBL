@@ -1,4 +1,4 @@
-import { surroundSelectedRange } from "./selection";
+import { surroundSelectedRange } from "../editing/selection";
 
 const styles = {
   position: 'absolute',
@@ -15,7 +15,7 @@ const fontColorButtonStyle = (color) => {
   return `margin: 2px; border: 0; width:15px; height: 15px; background-color: ${color}`
 }
 
-function ColorPalette({ $target, fontColorMap }) {
+export default function ColorPalette({ $target, fontColorMap }) {
   const $colorPalette = document.createElement('div');
 
   $colorPalette.className = 'note-font-color-palette palette';
@@ -69,5 +69,3 @@ function ColorPalette({ $target, fontColorMap }) {
   this.render();
   this.bindEvents();
 }
-
-export default ColorPalette;

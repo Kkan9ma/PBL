@@ -1,5 +1,5 @@
-import CommandButtonGroup from './CommandButtonGroup';
-import MediaButtonGroup from './MediaButtonGroup';
+import CommandButtonGroup from '../buttonGroups/CommandButtonGroup';
+import MediaButtonGroup from '../buttonGroups/MediaButtonGroup';
 
 const styles = {
   backgroundColor: '#f5f5f5',

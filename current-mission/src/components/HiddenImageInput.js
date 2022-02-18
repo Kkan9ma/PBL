@@ -1,8 +1,8 @@
-import { $ } from "./dom";
-import { imageFileTypes } from "./settings";
-import { createImageElement, validImageFileType } from "./utils";
+import { $ } from "../lib/dom";
+import { imageFileTypes } from "../settings";
+import { createImageElement, validImageFileType } from "../lib/utils";
 
-function HiddenImageInput({ $target }) {
+export default function HiddenImageInput({ $target }) {
   const $hiddenImageInput = document.createElement('input');
 
   $hiddenImageInput.type = 'file';
@@ -45,5 +45,3 @@ function HiddenImageInput({ $target }) {
   this.render();
   this.bindEvents();
 }
-
-export default HiddenImageInput;

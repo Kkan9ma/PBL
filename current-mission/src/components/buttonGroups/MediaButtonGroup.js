@@ -1,10 +1,8 @@
 import '@fortawesome/fontawesome-free/js/all.js';
-import ColorPalette from './ColorPalette';
-import { $ } from './dom';
-import HiddenImageInput from './HiddenImageInput';
-import { icons } from './icons/commandButtons';
-import { fontColorMap } from './settings';
-import { toggleFontColorPaletteDisplay } from './utils';
+import HiddenImageInput from '../HiddenImageInput';
+import ColorPalette from '../ColorPalette';
+import { toggleFontColorPaletteDisplay } from '../../lib/utils';
+import { commandButtonIcons, fontColorMap } from '../../settings';
 
 const styles = {
   listStyle: 'none',
@@ -51,7 +49,7 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
                     background-color: #fff
                   '
                 >
-                  ${icons[command]}
+                  ${commandButtonIcons[command]}
                 </button>
               </li>
             `
@@ -82,7 +80,6 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
 
     const { target } = event;
     const button = target.closest('button') ?? target.querySelector('button');
-    const { actionType } = button.dataset;
     const { command } = button.dataset;
 
     if (command === 'fontColor') {
