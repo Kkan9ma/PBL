@@ -22,8 +22,4 @@ export default function NoteContainer({ $target, commandsList }) {
     $target: $noteContainer,
     commandsList,
   });
-
-  this.render = () => {
-    this.toolbar.render();
-  };
 }

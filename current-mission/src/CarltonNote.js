@@ -16,14 +16,8 @@ function CarltonNote({ $target, commandsList }) {
     commandsList: this.state.commandsList
   });
 
-  this.render = () => {
-    this.noteContainer.render();
-  }
-
   this.init = () => {
     this.state.commandsList = commandsList;
-
-    this.render();
   }
 
   this.init();

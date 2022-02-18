@@ -47,6 +47,5 @@ export default function ColorPalette({ $target, fontColorMap }) {
     })
   }
 
-  this.render();
   this.bindEvents();
 }

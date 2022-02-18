@@ -11,10 +11,6 @@ export default function ContentEditingArea({ $target, commandsList }) {
   this.commands = commandsList;
   this.target.appendChild($contentEditingArea);
 
-  this.render = () => {
-    $contentEditingArea.innerHTML = '';
-  };
-
   this.handleShortcutInput = (event) => {
     if (event.code === 'KeyS' && event.shiftKey && !event.altKey) { // strikethrough
       event.preventDefault();
@@ -45,10 +41,5 @@ export default function ContentEditingArea({ $target, commandsList }) {
     })
   }
 
-  this.init = () => {
-    this.render();
-    this.bindEvents();
-  }
-
-  this.init();
+  this.bindEvents();
 }

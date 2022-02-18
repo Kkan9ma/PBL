@@ -27,11 +27,4 @@ export default function ToolbarArea({
     action: 'media-command',
     executeTextCommand,
   });
-
-  this.render = () => {
-    this.textCommandButtonGroup.render();
-    this.mediaButtonGroup.render();
-  };
-
-  this.render();
 }

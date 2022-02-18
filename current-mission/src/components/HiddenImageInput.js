@@ -40,6 +40,5 @@ export default function HiddenImageInput({ $target }) {
       this.onUploadImage(event)
     })
   }
-  this.render();
   this.bindEvents();
 }
