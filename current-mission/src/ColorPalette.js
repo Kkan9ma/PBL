@@ -1,3 +1,5 @@
+import { surroundSelectedRange } from "./selection";
+
 const styles = {
   position: 'absolute',
   top: '50px',
@@ -26,6 +28,26 @@ function ColorPalette({ $target, fontColorMap }) {
     $colorPalette.style[style] = styles[style];
   }
 
+  this.onColorText = (event) => {
+    const color = event.target.style.backgroundColor;
+    const selection = window.getSelection();
+
+    if (!selection.baseNode) {
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    if (range.collapsed) {
+      return;
+    }
+
+    const span = document.createElement('span');
+
+    span.style.color = color;
+    surroundSelectedRange(selection, span, true);
+  }
+
   this.render = () => {
     $colorPalette.innerHTML = `
       ${Object.keys(fontColorMap[0])
@@ -34,6 +56,18 @@ function ColorPalette({ $target, fontColorMap }) {
     `
     this.target.append($colorPalette);
   }
+
+  this.bindEvents = () => {
+    $colorPalette.addEventListener('click', (event) => {
+      if (event.target.tagName !== 'BUTTON') {
+        return;
+      }
+      this.onColorText(event);
+    })
+  }
+
+  this.render();
+  this.bindEvents();
 }
 
 export default ColorPalette;
