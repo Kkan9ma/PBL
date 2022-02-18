@@ -38,5 +38,5 @@ export function executeTextCommand(command) {
     return;
   };
 
-  surroundSelectedRange(selection, newTag)
+  surroundSelectedRange(selection, document.createElement(newTag))
 }
