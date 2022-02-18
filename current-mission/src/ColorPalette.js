@@ -6,6 +6,7 @@ const styles = {
   border: '1px solid #bababa',
   verticalAlign: 'center',
   padding: '5px',
+  display: 'none',
 }
 
 const fontColorButtonStyle = (color) => {
@@ -15,7 +16,7 @@ const fontColorButtonStyle = (color) => {
 function ColorPalette({ $target, fontColorMap }) {
   const $colorPalette = document.createElement('div');
 
-  $colorPalette.className = 'note-font-color-palette';
+  $colorPalette.className = 'note-font-color-palette palette';
   this.target = $target;
   this.state = {
     colors: fontColorMap ? fontColorMap : [],
