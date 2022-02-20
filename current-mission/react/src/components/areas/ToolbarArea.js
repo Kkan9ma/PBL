@@ -56,8 +56,8 @@ function ToolbarArea({ commandsList }) {
 
   return (
     <NoteToolbar className="note-toolbar">
-      <CommandButtonGroup commandsList={commands.text} action="text-command" onTextCommand={onTextCommand} />
-      <CommandButtonGroup commandsList={commands.media} action="media-command" isColorPalette={true} isHiddenInput={true} onMediaCommand={onMediaCommand} />
+      <CommandButtonGroup key='text-command-button-group' commandsList={commands.text} action="text-command" onTextCommand={onTextCommand} />
+      <CommandButtonGroup key='media-command-button-group' commandsList={commands.media} action="media-command" isColorPalette={true} isHiddenInput={true} onMediaCommand={onMediaCommand} />
     </NoteToolbar>
   )
 }

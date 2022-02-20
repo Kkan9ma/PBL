@@ -45,8 +45,9 @@ function ColorPalette() {
 
   return (
     <Palette className="note-font-color-palette palette">
-      {Object.keys(fontColorMap[0]).map(fontColor =>
+      {Object.keys(fontColorMap[0]).map((fontColor, index) =>
         <FontColorButton
+          key={index}
           fontColor={fontColor}
           onClick={() => { onColorText(fontColor) }}
         />)
