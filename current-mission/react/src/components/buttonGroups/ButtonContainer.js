@@ -14,12 +14,13 @@ const NoteCommandButton = styled.button`
   background-color: #fff
 `
 
-function ButtonContainer({ command, action }) {
+function ButtonContainer({ command, action, onCommand = false }) {
   return (
     <NoteButtonContainer className={`note-button-container ${command}`}>
       <NoteCommandButton className={`note-command-button ${command}`}
         data-command={command}
         data-action-type={action}
+        onClick={onCommand}
       >
         {commandButtonIcons[command]}
       </NoteCommandButton>
