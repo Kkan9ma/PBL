@@ -1,4 +1,5 @@
 import React from 'react';
+import { $ } from '../lib/dom';
 import { createImageElement, validImageFileType } from '../lib/utils';
 import { imageFileTypes } from '../settings';
 

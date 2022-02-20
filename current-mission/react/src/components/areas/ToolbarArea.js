@@ -46,7 +46,7 @@ const onMediaCommand = (event) => {
     'fontColor': handleClickFontColor(event),
     'uploadImage': handleClickImageUpload(event),
     'default': () => {console.log('Error: Input wrong command.')}
-  }
+  };
 
   handler[command];
 }
@@ -56,8 +56,20 @@ function ToolbarArea({ commandsList }) {
 
   return (
     <NoteToolbar className="note-toolbar">
-      <CommandButtonGroup key='text-command-button-group' commandsList={commands.text} action="text-command" onTextCommand={onTextCommand} />
-      <CommandButtonGroup key='media-command-button-group' commandsList={commands.media} action="media-command" isColorPalette={true} isHiddenInput={true} onMediaCommand={onMediaCommand} />
+      <CommandButtonGroup
+        key='text-command-button-group'
+        commandsList={commands.text} 
+        action="text-command" 
+        onTextCommand={onTextCommand} 
+      />
+      <CommandButtonGroup 
+        key='media-command-button-group' 
+        commandsList={commands.media} 
+        action="media-command" 
+        isColorPalette
+        isHiddenInput
+        onMediaCommand={onMediaCommand}
+      />
     </NoteToolbar>
   )
 }

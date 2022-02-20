@@ -1,6 +1,13 @@
 import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBold, faItalic, faUnderline, faStrikethrough, faPaintbrush, faImages } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBold,
+  faItalic,
+  faUnderline,
+  faStrikethrough,
+  faPaintbrush,
+  faImages,
+} from '@fortawesome/free-solid-svg-icons';
 
 export const commandButtonIcons = {
   bold: <FontAwesomeIcon icon={faBold} />,
@@ -8,7 +15,7 @@ export const commandButtonIcons = {
   underline: <FontAwesomeIcon icon={faUnderline} />,
   strikethrough: <FontAwesomeIcon icon={faStrikethrough} />,
   fontColor: <FontAwesomeIcon icon={faPaintbrush} />,
-  uploadImage: <FontAwesomeIcon icon={faImages} />
+  uploadImage: <FontAwesomeIcon icon={faImages} />,
 };
 
 export const textCommandTagMap = {
@@ -22,8 +29,8 @@ export const commandKeyMap = {
   KeyB: 'bold',
   KeyI: 'italic',
   KeyS: 'strikethrough',
-  KeyU: 'underline'
-}
+  KeyU: 'underline',
+};
 
 export const fontColorMap = [
   {
@@ -37,18 +44,18 @@ export const fontColorMap = [
     white: '#ffffff',
     gray: '#808080',
     black: '#000000',
-  }
-]
+  },
+];
 
 export const imageFileTypes = [
-  "image/apng",
-  "image/bmp",
-  "image/gif",
-  "image/jpeg",
-  "image/pjpeg",
-  "image/png",
-  "image/svg+xml",
-  "image/tiff",
-  "image/webp",
-  "image/x-icon"
-]
+  'image/apng',
+  'image/bmp',
+  'image/gif',
+  'image/jpeg',
+  'image/pjpeg',
+  'image/png',
+  'image/svg+xml',
+  'image/tiff',
+  'image/webp',
+  'image/x-icon',
+];

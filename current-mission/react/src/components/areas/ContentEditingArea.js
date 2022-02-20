@@ -40,7 +40,7 @@ const handleKeyDown = (event) => {
 
 function ContentEditingArea() {
   return (
-    <ContentEditableComponent className="carlton-content-editing-area" contentEditable={true} suppressContentEditableWarning={true}
+    <ContentEditableComponent className="carlton-content-editing-area" contentEditable suppressContentEditableWarning
       onKeyDown={handleKeyDown}
     >
       contentEditable
