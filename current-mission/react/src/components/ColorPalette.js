@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { surroundSelectedRange } from '../editing/selection';
+import { $create } from '../lib/dom';
 import { fontColorMap } from '../settings';
 
 const Palette = styled.div`
@@ -22,9 +24,33 @@ const FontColorButton = styled.button`
 `;
 
 function ColorPalette() {
+  const onColorText = (fontColor) => {
+    const selection = window.getSelection();
+
+    if (!selection.baseNode) {
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    if (range.collapsed) {
+      return;
+    }
+
+    const span = $create('span');
+
+    span.style.color = fontColor;
+    surroundSelectedRange(selection, span, true);
+  }
+
   return (
     <Palette className="note-font-color-palette palette">
-      {Object.keys(fontColorMap[0]).map(fontColor => <FontColorButton fontColor={fontColor} />)}
+      {Object.keys(fontColorMap[0]).map(fontColor =>
+        <FontColorButton
+          fontColor={fontColor}
+          onClick={() => { onColorText(fontColor) }}
+        />)
+      }
     </Palette>
   )
 }
