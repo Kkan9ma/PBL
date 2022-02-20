@@ -1,3 +1,16 @@
+import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBold, faItalic, faUnderline, faStrikethrough, faPaintbrush, faImages } from '@fortawesome/free-solid-svg-icons';
+
+export const commandButtonIcons = {
+  bold: <FontAwesomeIcon icon={faBold} />,
+  italic: <FontAwesomeIcon icon={faItalic} />,
+  underline: <FontAwesomeIcon icon={faUnderline} />,
+  strikethrough: <FontAwesomeIcon icon={faPaintbrush} />,
+  fontColor: <FontAwesomeIcon icon={faStrikethrough} />,
+  uploadImage: <FontAwesomeIcon icon={faImages} />
+};
+
 export const textCommandTagMap = {
   bold: ['B', 'STRONG'],
   italic: ['I', 'EM'],
@@ -39,13 +52,3 @@ export const imageFileTypes = [
   "image/webp",
   "image/x-icon"
 ]
-
-export const commandButtonIcons = {
-  bold: '<i class="fas fa-bold"></i>',
-  italic: '<i class="fas fa-italic"></i>',
-  underline: '<i class="fas fa-underline"></i>',
-  strikethrough: '<i class="fas fa-strikethrough"></i>',
-  fontColor: '<i class="fa-solid fa-paintbrush"></i>',
-  uploadImage: '<i class="fas fa-images"></i>',
-  video: '<i class="fas fa-video"></i>',
-};

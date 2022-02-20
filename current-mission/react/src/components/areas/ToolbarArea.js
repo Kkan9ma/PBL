@@ -1,31 +1,15 @@
-import { $create } from '../../lib/dom';
 import CommandButtonGroup from '../buttonGroups/CommandButtonGroup';
-import MediaButtonGroup from '../buttonGroups/MediaButtonGroup';
+import React from 'react';
 
-export default function ToolbarArea({
-  $target,
-  commandsList,
-  executeTextCommand,
-}) {
-  const $toolbarArea = $create('div');
+function ToolbarArea({ commandsList }) {
+  const commands = commandsList;
 
-  $toolbarArea.className = 'note-toolbar';
-
-  this.target = $target;
-  this.commandsList = commandsList;
-  this.target.appendChild($toolbarArea);
-
-  this.textCommandButtonGroup = new CommandButtonGroup({
-    $target: $toolbarArea,
-    commandsList: this.commandsList.text,
-    action: 'text-command',
-    executeTextCommand,
-  });
-
-  this.mediaButtonGroup = new MediaButtonGroup({
-    $target: $toolbarArea,
-    commandsList: this.commandsList.media,
-    action: 'media-command',
-    executeTextCommand,
-  });
+  return (
+    <div className='note-toolbar'>
+      <CommandButtonGroup commandsList={commands.text} action='text-command' />
+      <CommandButtonGroup commandsList={commands.media} action='media-command' isColorPalette={true} isHiddenInput={true} />
+    </div>
+  )
 }
+
+export default ToolbarArea;

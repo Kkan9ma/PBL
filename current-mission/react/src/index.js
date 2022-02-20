@@ -1,11 +1,5 @@
-import CarltonNote from './CarltonNote';
-import { $ } from './lib/dom';
-import './styles.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-new CarltonNote({
-  $target: $('#root'),
-  commandsList: {
-    text: ['bold', 'italic', 'underline', 'strikethrough'],
-    media: ['fontColor', 'uploadImage'],
-  },
-});
+ReactDOM.render(<App />, document.querySelector('#root'));
