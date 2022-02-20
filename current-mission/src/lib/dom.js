@@ -10,6 +10,7 @@ function getNextNode(node) {
     }
     node = node.parentNode;
   }
+  return null;
 }
 
 export function getNodesInRange(range) {
@@ -42,15 +43,14 @@ export function getNodesInRange(range) {
 export function nextNode(node) {
   if (node.hasChildNodes()) {
     return node.firstChild;
-  } else {
-    while (node && !node.nextSibling) {
-      node = node.parentNode;
-    }
-    if (!node) {
-      return null;
-    }
-    return node.nextSibling;
   }
+  while (node && !node.nextSibling) {
+    node = node.parentNode;
+  }
+  if (!node) {
+    return null;
+  }
+  return node.nextSibling;
 }
 
 export function getRangeSelectedNodes(range) {
@@ -70,7 +70,7 @@ export function getRangeSelectedNodes(range) {
 
   // Add partially selected nodes at the start of the range
   node = range.startContainer;
-  while (node && node != range.commonAncestorContainer) {
+  while (node && node !== range.commonAncestorContainer) {
     rangeNodes.unshift(node);
     node = node.parentNode;
   }
@@ -123,4 +123,16 @@ export function $($target, scope = document) {
 
 export function isTextNode(node) {
   return node && node.nodeType === 3;
+}
+
+export function $create(tagName) {
+  return document.createElement(tagName);
+}
+
+export function $createFragment() {
+  return document.createDocumentFragment();
+}
+
+export function on(target, eventName, handler) {
+  target.addEventListener(eventName, handler);
 }

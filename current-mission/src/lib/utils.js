@@ -1,4 +1,4 @@
-import { $ } from "./dom";
+import { $, $create } from "./dom";
 import { imageFileTypes } from "../settings";
 
 export function toggleFontColorPaletteDisplay() {
@@ -17,7 +17,7 @@ export function validImageFileType(file) {
 }
 
 export function createImageElement(file) {
-  const image = document.createElement('img');
+  const image = $create('img');
 
   image.src = URL.createObjectURL(file);
 

@@ -3,10 +3,10 @@ import HiddenImageInput from '../HiddenImageInput';
 import ColorPalette from '../ColorPalette';
 import { toggleFontColorPaletteDisplay } from '../../lib/utils';
 import { commandButtonIcons, fontColorMap } from '../../settings';
-import { $ } from '../../lib/dom';
+import { $, $create, on } from '../../lib/dom';
 
-export default function MediaButtonGroup({ $target, commandsList, action, executeTextCommand }) {
-  const $buttonGroup = document.createElement('ul');
+export default function MediaButtonGroup({ $target, commandsList, action }) {
+  const $buttonGroup = $create('ul');
 
   $buttonGroup.className = `note-button-group ${action}`;
   this.target = $target;
@@ -14,7 +14,7 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
 
   this.colorPalette = new ColorPalette({
     $target: $buttonGroup,
-    fontColorMap: fontColorMap
+    fontColorMap
   })
 
   this.hiddenImageInput = new HiddenImageInput({
@@ -62,7 +62,7 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
     }
 
     const { target } = event;
-    const button = target.closest('button') ?? target.querySelector('button');
+    const button = target.closest('button') ?? $('button', target);
     const { command } = button.dataset;
 
     if (command === 'fontColor') {
@@ -75,9 +75,7 @@ export default function MediaButtonGroup({ $target, commandsList, action, execut
 
 
   this.bindEvents = () => {
-    $buttonGroup.addEventListener('click', (event) => {
-      this.handleClick(event);
-    });
+    on($buttonGroup, 'click', this.handleClick);
   };
 
   this.render();

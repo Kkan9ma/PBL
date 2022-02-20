@@ -1,12 +1,13 @@
 import { surroundSelectedRange } from "../editing/selection";
+import { $create, on } from "../lib/dom";
 
 export default function ColorPalette({ $target, fontColorMap }) {
-  const $colorPalette = document.createElement('div');
+  const $colorPalette = $create('div');
 
   $colorPalette.className = 'note-font-color-palette palette';
   this.target = $target;
   this.state = {
-    colors: fontColorMap ? fontColorMap : [],
+    colors: fontColorMap,
   }
 
   this.onColorText = (event) => {
@@ -23,7 +24,7 @@ export default function ColorPalette({ $target, fontColorMap }) {
       return;
     }
 
-    const span = document.createElement('span');
+    const span = $create('span');
 
     span.style.color = color;
     surroundSelectedRange(selection, span, true);
@@ -39,7 +40,7 @@ export default function ColorPalette({ $target, fontColorMap }) {
   }
 
   this.bindEvents = () => {
-    $colorPalette.addEventListener('click', (event) => {
+    on($colorPalette, 'click', (event) => {
       if (event.target.tagName !== 'BUTTON') {
         return;
       }
