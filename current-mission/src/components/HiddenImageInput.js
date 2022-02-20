@@ -1,9 +1,9 @@
-import { $ } from "../lib/dom";
+import { $, $create, on } from "../lib/dom";
 import { imageFileTypes } from "../settings";
 import { createImageElement, validImageFileType } from "../lib/utils";
 
 export default function HiddenImageInput({ $target }) {
-  const $hiddenImageInput = document.createElement('input');
+  const $hiddenImageInput = $create('input');
 
   $hiddenImageInput.type = 'file';
   $hiddenImageInput.accept = imageFileTypes.join(', ');
@@ -33,12 +33,8 @@ export default function HiddenImageInput({ $target }) {
   }
 
   this.bindEvents = () => {
-    $hiddenImageInput.addEventListener('click', (event) => {
-      event.stopPropagation();
-    })
-    $hiddenImageInput.addEventListener('change', (event) => {
-      this.onUploadImage(event)
-    })
+    on($hiddenImageInput, 'click', (event) => { event.stopPropagation(); });
+    on($hiddenImageInput, 'change', this.onUploadImage);
   }
   this.bindEvents();
 }

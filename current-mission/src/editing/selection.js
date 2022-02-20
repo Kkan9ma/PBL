@@ -1,4 +1,4 @@
-import { $, getParent, getSelectedNodes, removeEmptyElements, removeNestedSpans } from "../lib/dom";
+import { $, $create, $createFragment, getParent, getSelectedNodes, removeEmptyElements, removeNestedSpans } from "../lib/dom";
 
 export function surroundSelectedRange(selection, element, styleOption = false) {
   const selectedNodes = getSelectedNodes();
@@ -12,7 +12,7 @@ export function surroundSelectedRange(selection, element, styleOption = false) {
   let lastEndContainer;
 
   for (let i = 0; i < selectedNodes.length; i++) {
-    document.querySelector('.carlton-content-editing-area').normalize();
+    $('.carlton-content-editing-area').normalize();
 
     if (i === 0) {
       // 첫 node의 경우
@@ -73,7 +73,7 @@ export function surroundSelectedRange(selection, element, styleOption = false) {
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(newRange);
 
-      const newElement = document.createElement(element.tagName.toLowerCase());
+      const newElement = $create(element.tagName.toLowerCase());
 
       if (styleOption) {
         Array.from(element.style).forEach((styleType, index) => {
@@ -111,7 +111,7 @@ export function removeAppliedTagOnRange(range, tags) {
       // 선택한 영역에 원하는 tag가 있다.
       // 모두 선택한 tag의 강조 표시로 되어 있다. ex) <strong>123</strong>
 
-      const newElement = document.createElement('span');
+      const newElement = $create('span');
       const parent = getParent(tag.toUpperCase(), range);
 
       if (!parent) {
@@ -121,7 +121,7 @@ export function removeAppliedTagOnRange(range, tags) {
       newElement.appendChild(range.extractContents());
       range.insertNode(newElement);
 
-      const newFragment = document.createDocumentFragment();
+      const newFragment = $createFragment();
 
       parent.childNodes.forEach((childNode) => {
         if (childNode.tagName === 'SPAN') {
@@ -133,14 +133,15 @@ export function removeAppliedTagOnRange(range, tags) {
               </span>
             </span>
           */
-          const tempFragment = document.createDocumentFragment();
+          const tempFragment = $createFragment();
           const fragmentContents = range.createContextualFragment(childNode.innerHTML);
 
           tempFragment.append(fragmentContents);
           newFragment.append(tempFragment);
         } else {
           // remove nested tags 
-          const temp = document.createElement(tag.toLowerCase());
+          const temp = $create(tag.toLowerCase());
+
           if (childNode.innerHTML) {
             temp.innerHTML = childNode.innerHTML;
           } else {
@@ -165,5 +166,5 @@ export function removeAppliedTagOnRange(range, tags) {
     removeNestedSpans($('.carlton-content-editing-area'));
   });
 
-  document.querySelector('.carlton-content-editing-area').normalize();
+  $('.carlton-content-editing-area').normalize();
 }

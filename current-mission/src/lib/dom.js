@@ -124,3 +124,15 @@ export function $($target, scope = document) {
 export function isTextNode(node) {
   return node && node.nodeType === 3;
 }
+
+export function $create(tagName) {
+  return document.createElement(tagName);
+}
+
+export function $createFragment() {
+  return document.createDocumentFragment();
+}
+
+export function on(target, eventName, handler) {
+  target.addEventListener(eventName, handler);
+}

@@ -1,10 +1,10 @@
 import ContentEditingArea from './areas/ContentEditingArea';
 import ToolbarArea from './areas/ToolbarArea';
 import { executeTextCommand } from '../editing/executeTextCommand';
-
+import { $create } from '../lib/dom';
 
 export default function NoteContainer({ $target, commandsList }) {
-  const $noteContainer = document.createElement('div');
+  const $noteContainer = $create('div');
 
   $noteContainer.id = 'note-container';
 
@@ -12,7 +12,7 @@ export default function NoteContainer({ $target, commandsList }) {
   this.target.appendChild($noteContainer);
   this.commandsList = commandsList;
 
-  this.toolbar = new ToolbarArea({
+  this.toolbarArea = new ToolbarArea({
     $target: $noteContainer,
     commandsList: this.commandsList,
     executeTextCommand,

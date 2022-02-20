@@ -1,3 +1,4 @@
+import { $create } from '../../lib/dom';
 import CommandButtonGroup from '../buttonGroups/CommandButtonGroup';
 import MediaButtonGroup from '../buttonGroups/MediaButtonGroup';
 
@@ -6,7 +7,7 @@ export default function ToolbarArea({
   commandsList,
   executeTextCommand,
 }) {
-  const $toolbarArea = document.createElement('div');
+  const $toolbarArea = $create('div');
 
   $toolbarArea.className = 'note-toolbar';
 

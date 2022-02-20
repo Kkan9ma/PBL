@@ -1,8 +1,9 @@
 import { executeTextCommand } from "../../editing/executeTextCommand";
+import { $create, on } from "../../lib/dom";
 import { commandKeyMap } from "../../settings";
 
 export default function ContentEditingArea({ $target, commandsList }) {
-  const $contentEditingArea = document.createElement('div');
+  const $contentEditingArea = $create('div');
 
   $contentEditingArea.className = 'carlton-content-editing-area';
   $contentEditingArea.contentEditable = 'true';
@@ -36,9 +37,7 @@ export default function ContentEditingArea({ $target, commandsList }) {
   }
 
   this.bindEvents = () => {
-    $contentEditingArea.addEventListener('keydown', (event) => {
-      this.handleKeydown(event);
-    })
+    on($contentEditingArea, 'keydown', this.handleKeydown);
   }
 
   this.bindEvents();

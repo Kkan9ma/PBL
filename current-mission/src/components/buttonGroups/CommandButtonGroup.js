@@ -1,8 +1,10 @@
 import '@fortawesome/fontawesome-free/js/all.js';
+import { $, $create, on } from '../../lib/dom';
 import { commandButtonIcons } from '../../settings';
 
 export default function CommandButtonGroup({ $target, commandsList, action, executeTextCommand }) {
-  const $buttonGroup = document.createElement('ul');
+  const $buttonGroup = $create('ul');
+
   $buttonGroup.className = `note-button-group ${action}`;
   this.target = $target;
   this.commandsList = commandsList;
@@ -34,7 +36,7 @@ export default function CommandButtonGroup({ $target, commandsList, action, exec
     }
 
     const { target } = event;
-    const button = target.closest('button') ?? target.querySelector('button');
+    const button = target.closest('button') ?? $('button', target);
     const { actionType } = button.dataset;
     const { command } = button.dataset;
 
@@ -45,9 +47,7 @@ export default function CommandButtonGroup({ $target, commandsList, action, exec
 
 
   this.bindEvents = () => {
-    $buttonGroup.addEventListener('click', (event) => {
-      this.handleClick(event);
-    });
+    on($buttonGroup, 'click', this.handleClick);
   };
 
   this.render();

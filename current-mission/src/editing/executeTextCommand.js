@@ -1,4 +1,4 @@
-import { $, getNodesInRange, isTextNode } from "../lib/dom";
+import { $, $create, getNodesInRange, isTextNode } from "../lib/dom";
 import { removeAppliedTagOnRange, surroundSelectedRange } from "./selection";
 import { textCommandTagMap } from "../settings";
 
@@ -39,5 +39,5 @@ export function executeTextCommand(command) {
     return;
   }
 
-  surroundSelectedRange(selection, document.createElement(newTag))
+  surroundSelectedRange(selection, $create(newTag))
 }
