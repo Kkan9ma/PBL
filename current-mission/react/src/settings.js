@@ -6,8 +6,8 @@ export const commandButtonIcons = {
   bold: <FontAwesomeIcon icon={faBold} />,
   italic: <FontAwesomeIcon icon={faItalic} />,
   underline: <FontAwesomeIcon icon={faUnderline} />,
-  strikethrough: <FontAwesomeIcon icon={faPaintbrush} />,
-  fontColor: <FontAwesomeIcon icon={faStrikethrough} />,
+  strikethrough: <FontAwesomeIcon icon={faStrikethrough} />,
+  fontColor: <FontAwesomeIcon icon={faPaintbrush} />,
   uploadImage: <FontAwesomeIcon icon={faImages} />
 };
 

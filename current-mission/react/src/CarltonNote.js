@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import NoteContainer from "./components/NoteContainer";
 
 function CarltonNote({ commandsList }) {
   return (
     <>
-      <section className="calrton-note" ref={carltonSectionRef}>
+      <section className="calrton-note" >
         <NoteContainer commandsList={commandsList} />
       </section>
     </>
