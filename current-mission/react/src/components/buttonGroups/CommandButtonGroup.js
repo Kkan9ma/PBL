@@ -13,14 +13,12 @@ const NoteButtonGroup = styled.ul`
 
 function CommandButtonGroup({ commandsList, action, isColorPalette = false, isHiddenInput = false, onTextCommand = false, onMediaCommand = false}) {
   return (
-    <>
       <NoteButtonGroup className={`note-button-group ${action}`} >
         {onTextCommand ? commandsList.map((command, index) => ButtonContainer({ command, action, onCommand: onTextCommand, index })) : ''}
         {onMediaCommand ? commandsList.map((command, index) => ButtonContainer({ command, action, onCommand: onMediaCommand, index })) : ''}
         {isColorPalette ? <ColorPalette /> : ''}
         {isHiddenInput ? <HiddenImageInput /> : ''}
       </NoteButtonGroup>
-    </>
   )
 }
 

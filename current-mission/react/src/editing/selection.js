@@ -28,8 +28,6 @@ export function surroundSelectedRange(selection, element, styleOption = false) {
         lastEndContainer = selection.anchorNode;
       }
     } else if (flag === false && i !== 0 &&
-      // (selectedNodes[i].nodeType === 1 && selectedNodes.tagName !== 'DIV') &&
-      // selectedNodes[i].nodeValue && // To ignore whitespace text node.
       selectedNodes[i].textContent.length > 0
     ) {
       // 첫/마지막 node가 아닌 경우 && div를 만난 적 없는 경우
