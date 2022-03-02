@@ -11,6 +11,13 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve("./dist"),
   },
+  devServer: {
+    open: true,
+    client: {
+      overlay: true,
+    },
+  },
+  stats: 'errors-only',
   module: {
     rules: [
       {

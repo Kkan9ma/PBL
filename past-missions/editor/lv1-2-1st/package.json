@@ -4,6 +4,7 @@
   "description": "This README would normally document whatever steps are necessary to get your application up and running.",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack serve --mode development",
     "build": "./node_modules/.bin/webpack"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "html-webpack-plugin": "^5.3.2",
     "style-loader": "^3.1.0",
     "webpack": "^5.44.0",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^4.1.1"
   }
 }
