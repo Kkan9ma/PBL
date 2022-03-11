@@ -3,6 +3,7 @@ import reset from "styled-reset";
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Header from './components/Header';
 import Main from './components/main';
+import Editor from './components/Editor';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -15,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+
 const theme = {
 
 }
@@ -24,7 +26,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
         <Header />
-        <Main />
+        <Main>
+          <Editor/>
+        </Main>
     </ThemeProvider>
   )
 }

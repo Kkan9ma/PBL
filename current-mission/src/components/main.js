@@ -1,8 +1,11 @@
 import React from 'react';
+import Editor from './Editor';
 
 function Main() {
   return (
-    <main>Main</main>
+    <main>
+      <Editor/>
+    </main>
   )
 }
 
