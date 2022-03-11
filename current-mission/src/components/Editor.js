@@ -158,7 +158,7 @@ function ContentsUploadContainer({optionName}) {
 
 const StyledEditorContainer = styled.div`
   border: 1px solid #ccc;
-  min-width: 768px;
+  min-width: 400px;
 `
 
 const StyledSubmitButton = styled.button`
@@ -189,6 +189,57 @@ function Editor() {
   // const [currentOption, setCurrentOption] = useState(link);
   
   return (
+    <>
+    {/* 콘텐츠를 위한 사진 업로드 */}
+    <button  type="button" style={{
+      margin: '0px',
+      height: '500px',
+      // padding: '0px 0px 60%',
+      border: 'none',
+      background: 'none',
+      font: 'inherit',
+      display: 'block',
+      position: 'relative',
+      width: '100%',
+      transition: 'opacity 0.1s ease 0s',
+      borderRadius: '4px',
+      boxSizing: 'border-box',
+
+    }}>
+      <div style={{width: '100%', height: '100%', display: 'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', backgroundColor: 'rgb(247, 248, 250)'}}>
+        <svg width="48" height="48" viewBox="0 0 48 48"
+         fill="currentColor" preserveAspectRatio="xMidYMid meet">
+           <path d="M11.952 9.778l2.397-5.994A1.778 1.778 0 0 1 16 2.667h16c.727 0 1.38.442 1.65 1.117l2.398 5.994h10.174c.982 0 1.778.796 1.778 1.778v32c0 .981-.796 1.777-1.778 1.777H1.778A1.778 1.778 0 0 1 0 43.556v-32c0-.982.796-1.778 1.778-1.778h10.174zM24 38c6.075 0 11-4.925 11-11s-4.925-11-11-11-11 4.925-11 11 4.925 11 11 11z"></path>
+           </svg>
+           <span style={{display:'block', marginTop: '10px'}}>
+             사진 올리기
+           </span>
+           <HiddenFileInput />
+        </div>
+      </button>
+
+    <div style={{padding: '20px', display:'flex',alignItems:'center'}}>
+      <label htmlFor="editor-title-input" style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        textAlign: 'left',
+        width: '400px',
+        lineHeight: '26px',
+        fontWeight: '600',
+      }}>
+        제목
+      <input id="editor-title-input" name="title-input" style={{flex: '0 0 350px', width: '80%', height: '30px', fontSize:'15px', resize: 'none',  border:'1px solid #bbbbbb', borderRadius:'5px'}}
+      placeholder="작성하실 글의 제목을 적어주세요."
+      />
+      </label>
+    </div>
+    <div>
+      <textarea style={{width: '100%', height: '100px', fontSize: '15px', resize: 'none', border:'1px solid #bbbbbb', borderRadius: '5px'}}
+        placeholder="사진에 대한 설명을 적어주세요."/>
+    </div>
+    {/* 위젯 편집 기능 TODO: 모달 등 다른 형태로 분리 예정 */}
     <StyledEditorContainer>
       <EditorHeader>
         <StyledToolbar>
@@ -203,6 +254,7 @@ function Editor() {
       </ul>
       <EditorSubmitContainer />
     </StyledEditorContainer>
+    </>
   )
 }
 
