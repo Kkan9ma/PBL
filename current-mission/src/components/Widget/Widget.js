@@ -1,13 +1,26 @@
 import React from 'react';
 import { StyledWidget } from './Widget.styles';
 
+function LinkWidget({type}) {
+  console.log(type);
+  return (
+    <div>
+      <span style={{color: 'white'}}>
+        {type} widget
+      </span>
+    </div>
+  )
+}
+
 function Widget({selectOption}) {
+  const link = '링크';
+  const audio = '오디오';
   return (
     <StyledWidget>
-      <span>
-        {selectOption === 'link' && '링크'}
-        {selectOption === 'audio' && '오디오'}
-      </span>
+      <div>
+        {selectOption === 'link' && <LinkWidget type={link} />}
+        {selectOption === 'audio' && <LinkWidget type={audio} />}
+      </div>
     </StyledWidget>
   )
 }

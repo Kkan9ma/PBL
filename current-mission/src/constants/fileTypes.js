@@ -11,6 +11,7 @@ export const imageFileTypes = [
   'image/x-icon',
 ];
 
-export const AudioFileTypes = [
-  'audio/mp3',
+export const audioFileTypes = [
+  'audio/ogg',
+  'audio/mpeg',
 ];

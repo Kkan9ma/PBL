@@ -11,6 +11,12 @@ function ContentsInfoModal({onClick, selectOptionList, selectOption, addWidget})
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const hiddenInput = e.target.querySelector('.hidden-file-inputfiles');
+    
+    if (hiddenInput && !hiddenInput.files[0].length) {
+      // no file uploaded
+      return;
+    }
     addWidget();
   }
 
