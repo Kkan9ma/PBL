@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ContentsInfoModal from "./components/ContentsInfoModal/ContentInfoModal";
 import ContentsUploadContainer from "./components/ContentsUploadContainer/ContentsUploadContainer";
+import { selectOptionList } from "./constants/options";
 
 function Editor() {
-
-  const currentOption = 'link';
-  // const currentOption = 'audio';
-  // const [currentOption, setCurrentOption] = useState(link);
+  const [selectOption, setSelectOption] = useState(selectOptionList[0]);
+  const onSelectToolbar = (index) => {
+    setSelectOption(selectOptionList[index])
+  }
   
   return (
     <>
       <ContentsUploadContainer />
-      <ContentsInfoModal currentOption={currentOption} />
+      <ContentsInfoModal onClick={onSelectToolbar} selectOptionList={selectOptionList} selectOption={selectOption} />
     </>
   )
 }
