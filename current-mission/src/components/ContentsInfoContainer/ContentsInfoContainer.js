@@ -11,10 +11,9 @@ function ContentsInfoContainer({onClick, selectOptionList, selectOption, addWidg
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const hiddenInput = e.target.querySelector('.hidden-file-inputfiles');
+    const hiddenInput = e.target.querySelector('.hidden-file-input');
     
-    if (hiddenInput && !hiddenInput.files[0].length) {
-      // no file uploaded
+    if (selectOption === selectOptionList[1] && !hiddenInput.files[0]) { // no audio file
       return;
     }
     addWidget();
