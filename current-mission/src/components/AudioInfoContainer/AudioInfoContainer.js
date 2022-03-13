@@ -18,12 +18,15 @@ function AudioInfoContainer() {
   const onUpload = (event) => {
     const file = event.target.files[0];
 
-    console.log(file.type);
     if (!validAudioFileType(file)) {
       alert('올바른 형식의 파일이 아닙니다.');
       return;
     }
 
+    if (file.size > 2000000) {
+      alert('오디오 파일 업로드는 최대 2MB 파일까지만 가능합니다.');
+      return;
+    }
     // setImage(getImageFromInput(file));
     // onUploadImage();
   }

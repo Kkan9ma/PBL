@@ -2,7 +2,6 @@ import React from 'react';
 import { StyledWidget } from './Widget.styles';
 
 function LinkWidget({type}) {
-  console.log(type);
   return (
     <div>
       <span style={{color: 'white'}}>

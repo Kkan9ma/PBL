@@ -26,8 +26,20 @@ function Editor() {
 
   return (
     <>
-      <ContentsUploadContainer selectOption={selectOption} isWidget={isWidget} onUploadImage={onUploadImage} onDeleteImage={onDeleteImage}/>
-      {isImage && <ContentsInfoModal addWidget={addWidget} onClick={onSelectToolbar} selectOptionList={selectOptionList} selectOption={selectOption} />} 
+      <ContentsUploadContainer 
+        selectOption={selectOption} 
+        isWidget={isWidget} 
+        onUploadImage={onUploadImage} 
+        onDeleteImage={onDeleteImage}
+      />
+      {isImage && 
+        <ContentsInfoModal 
+          addWidget={addWidget}
+          onClick={onSelectToolbar}
+          selectOptionList={selectOptionList}
+          selectOption={selectOption}
+        />
+      } 
     </>
   )
 }

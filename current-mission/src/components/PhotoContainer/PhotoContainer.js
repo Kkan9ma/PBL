@@ -25,6 +25,11 @@ function PhotoContainer({selectOption, onUploadImage, onDeleteImage, isWidget}) 
       return;
     }
 
+    if (file.size > 1000000) {
+      alert('이미지 업로드는 최대 1MB 파일까지만 가능합니다.');
+      return;
+    }
+
     setImage(getImageFromInput(file));
     onUploadImage();
   }
