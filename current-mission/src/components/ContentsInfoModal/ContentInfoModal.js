@@ -7,7 +7,12 @@ import AudioInfoContainer from "../AudioInfoContainer/AudioInfoContainer";
 import EditorSubmitContainer from "../EditorSubmitContainer/EditorSubmitContainer";
 import { generateKey } from "../../utils/utils";
 
-function ContentsInfoModal({onClick, selectOptionList, selectOption}) {
+function ContentsInfoModal({onClick, selectOptionList, selectOption, addWidget}) {
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addWidget();
+  }
 
   return (
     <>
@@ -22,12 +27,14 @@ function ContentsInfoModal({onClick, selectOptionList, selectOption}) {
           )}
         </StyledToolbar>
       </EditorHeader>
-      <ul>
-        <InstInfoContainer />
-        {selectOption === selectOptionList[0] && <LinkInfoContainer />}
-        {selectOption === selectOptionList[1] && <AudioInfoContainer />}
-      </ul>
-      <EditorSubmitContainer />
+      <form onSubmit={(e) => {onSubmit(e)}}>
+        <ul>
+          <InstInfoContainer />
+          {selectOption === selectOptionList[0] && <LinkInfoContainer />}
+          {selectOption === selectOptionList[1] && <AudioInfoContainer />}
+        </ul>
+        <EditorSubmitContainer isFilledAllInputs={1}/>
+      </form>
     </>
   )
 };

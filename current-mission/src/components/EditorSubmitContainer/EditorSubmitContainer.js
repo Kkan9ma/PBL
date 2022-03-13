@@ -1,10 +1,10 @@
 import React from "react";
 import { StyledSubmitButton } from "./EditorSubmitContainer.styles";
 
-function EditorSubmitContainer() {
+function EditorSubmitContainer({isFilledAllInputs}) {
   return (
     <div>
-      <StyledSubmitButton>편집 완료</StyledSubmitButton>
+      <StyledSubmitButton type="submit" isFilledAllInputs={isFilledAllInputs}>위젯 등록</StyledSubmitButton>
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import React, {useState, useRef} from "react";
 import { getImageFromInput, validImageFileType } from "../../utils/utils";
 import HiddenFileInput from "../HiddenFileInput/HiddenFileInput";
+import Widget from "../Widget/Widget";
 import { StyledPhotoContainer } from "./PhotoContainer.styles";
 
-function PhotoContainer({onUploadImage, onDeleteImage}) {
+function PhotoContainer({selectOption, onUploadImage, onDeleteImage, isWidget}) {
   const hiddenFileInputRef = useRef(null);
   const [image, setImage] = useState(false);
 
@@ -30,6 +31,7 @@ function PhotoContainer({onUploadImage, onDeleteImage}) {
 
   return (
     <StyledPhotoContainer>
+      {isWidget ? <Widget selectOption={selectOption}/> : ''}
       {
         image ? 
         <>
