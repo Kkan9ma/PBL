@@ -1,8 +1,6 @@
 import React from 'react';
 import reset from "styled-reset";
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import Header from './Header';
-import Main from './main';
 import Editor from './Editor';
 
 const GlobalStyle = createGlobalStyle`

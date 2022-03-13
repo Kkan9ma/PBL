@@ -7,7 +7,7 @@ import AudioInfoContainer from "../AudioInfoContainer/AudioInfoContainer";
 import EditorSubmitContainer from "../EditorSubmitContainer/EditorSubmitContainer";
 import { generateKey } from "../../utils/utils";
 
-function ContentsInfoModal({onClick, selectOptionList, selectOption, addWidget}) {
+function ContentsInfoContainer({onClick, selectOptionList, selectOption, addWidget}) {
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -45,4 +45,4 @@ function ContentsInfoModal({onClick, selectOptionList, selectOption, addWidget})
   )
 };
 
-export default ContentsInfoModal;
+export default ContentsInfoContainer;

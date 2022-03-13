@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ContentsInfoModal from "./components/ContentsInfoModal/ContentInfoModal";
+import ContentsInfoContainer from "./components/ContentsInfoContainer/ContentsInfoContainer";
 import ContentsUploadContainer from "./components/ContentsUploadContainer/ContentsUploadContainer";
 import { selectOptionList } from "./constants/options";
 
@@ -34,7 +34,7 @@ function Editor() {
         onDeleteImage={onDeleteImage}
       />
       {isImage && 
-        <ContentsInfoModal 
+        <ContentsInfoContainer 
           addWidget={addWidget}
           onClick={onSelectToolbar}
           selectOptionList={selectOptionList}
