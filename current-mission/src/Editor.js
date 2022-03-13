@@ -18,6 +18,7 @@ function Editor() {
   }
   const onDeleteImage = () => {
     setIsImage(false);
+    setIsWidget(false);
   }
 
   const addWidget = () => {
@@ -25,7 +26,7 @@ function Editor() {
   }
 
   return (
-    <>
+    <main>
       <ContentsUploadContainer 
         selectOption={selectOption} 
         isWidget={isWidget} 
@@ -40,7 +41,7 @@ function Editor() {
           selectOption={selectOption}
         />
       } 
-    </>
+    </main>
   )
 }
 

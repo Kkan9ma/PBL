@@ -1,25 +1,23 @@
 import React from 'react';
 import { StyledWidget } from './Widget.styles';
 
-function LinkWidget({type}) {
+function AssetWidget({type}) {
   return (
-    <div>
-      <span style={{color: 'white'}}>
-        {type} widget
-      </span>
-    </div>
+    <>
+      {type === 'link' && <img alt="link" src="https://img.icons8.com/ios-glyphs/30/000000/link--v1.png" />}
+      {type === 'audio' && <img alt="audio" src="https://img.icons8.com/ios-glyphs/50/000000/high-volume--v1.png" />}
+    </>
   )
 }
-
 function Widget({selectOption}) {
-  const link = '링크';
-  const audio = '오디오';
+  const condition = {
+    link: 'link',
+    audio: 'audio'
+  }
+
   return (
     <StyledWidget>
-      <div>
-        {selectOption === 'link' && <LinkWidget type={link} />}
-        {selectOption === 'audio' && <LinkWidget type={audio} />}
-      </div>
+      <AssetWidget type={condition[selectOption]} />
     </StyledWidget>
   )
 }
