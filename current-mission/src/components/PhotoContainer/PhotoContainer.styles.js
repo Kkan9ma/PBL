@@ -6,6 +6,7 @@ const StyledPhotoContainer = styled.div`
   margin-right: 10px;
   display: flex;
   justify-content: center;
+  position: relative;
 
   button {
     margin: 0px;
@@ -20,6 +21,20 @@ const StyledPhotoContainer = styled.div`
     border-radius: 4px;
   }
 
+  button.delete {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    text-align: center;
+    color: black;
+  }
+
+  button.delete:hover {
+    color: red;
+  }
+  
   span {
     display: block;
     margin-top: 10px;

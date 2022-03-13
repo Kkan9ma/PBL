@@ -3,10 +3,10 @@ import PhotoContainer from '../PhotoContainer/PhotoContainer';
 import PhotoInfoContainer from '../PhotoInfoContainer/PhotoInfoContainer';
 import StyledContentsUploadContainer from './ContentsUploadContainer.styles';
 
-function ContentsUploadContainer() {
+function ContentsUploadContainer({onUploadImage, onDeleteImage}) {
   return (
     <StyledContentsUploadContainer>
-      <PhotoContainer />
+      <PhotoContainer onUploadImage={onUploadImage} onDeleteImage={onDeleteImage}/>
       <PhotoInfoContainer />
     </StyledContentsUploadContainer>
   )
