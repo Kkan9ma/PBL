@@ -4,6 +4,8 @@ const StyledPhotoContainer = styled.div`
   flex: 0.5 0 0px;
   background-color: rgb(247, 248, 250);
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
 
   button {
     margin: 0px;
@@ -21,6 +23,10 @@ const StyledPhotoContainer = styled.div`
   span {
     display: block;
     margin-top: 10px;
+  }
+
+  img {
+    max-height: 500px;
   }
 `
 

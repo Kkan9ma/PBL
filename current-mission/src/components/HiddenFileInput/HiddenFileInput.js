@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyledDisplayNoneInput } from './HiddenFileInput.styles';
 
-function HiddenFileInput() {
+function HiddenFileInput({onClick, onUpload}, ref) {
   return (
-    <StyledDisplayNoneInput type="file" // TODO: accept file type
-      onClick={(event) => {event.stopPropagation();}}
-      onChange={()=>{}} // onChange
+    <StyledDisplayNoneInput type="file"
+      onClick={onClick}
+      onChange={(event)=>{onUpload(event)}}
+      ref={ref}
     />
   )
 }
 
-export default HiddenFileInput;
+export default React.forwardRef(HiddenFileInput);
