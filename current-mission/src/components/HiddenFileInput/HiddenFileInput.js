@@ -7,6 +7,7 @@ function HiddenFileInput({onClick, onUpload}, ref) {
       onClick={onClick}
       onChange={(event)=>{onUpload(event)}}
       ref={ref}
+      className="hidden-file-input"
     />
   )
 }

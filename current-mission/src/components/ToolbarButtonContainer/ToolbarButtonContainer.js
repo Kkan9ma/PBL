@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledButton, StyledListContainer, StyledSelectedButton } from "../ContentsInfoModal/EditorHeader.styles"
+import { StyledButton, StyledListContainer, StyledSelectedButton } from "../ContentsInfoContainer/EditorHeader.styles"
 
 
 

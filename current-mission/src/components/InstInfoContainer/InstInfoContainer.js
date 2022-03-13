@@ -6,7 +6,7 @@ function InstInfoContainer() {
     <StyledInfoContainer>
       <label htmlFor="inst-name">
         악기 이름
-        <input id="inst-name" name="inst-name" type="text" placeholder="악기 이름을 입력하세요."/>
+        <input id="inst-name" name="inst-name" type="text" placeholder="악기 이름을 입력하세요." required />
       </label>
     </StyledInfoContainer>
   )

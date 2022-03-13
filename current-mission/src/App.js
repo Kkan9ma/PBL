@@ -1,8 +1,7 @@
 import React from 'react';
 import reset from "styled-reset";
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import Header from './Header';
-import Main from './main';
+import Editor from './Editor';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -12,6 +11,9 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     box-sizing: border-box;
+  }
+  main {
+    padding: 30px;
   }
 `
 
@@ -24,8 +26,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-        <Header />
-        <Main />
+      <Editor />
     </ThemeProvider>
   )
 }

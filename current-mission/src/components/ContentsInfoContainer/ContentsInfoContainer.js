@@ -7,7 +7,17 @@ import AudioInfoContainer from "../AudioInfoContainer/AudioInfoContainer";
 import EditorSubmitContainer from "../EditorSubmitContainer/EditorSubmitContainer";
 import { generateKey } from "../../utils/utils";
 
-function ContentsInfoModal({onClick, selectOptionList, selectOption}) {
+function ContentsInfoContainer({onClick, selectOptionList, selectOption, addWidget}) {
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const hiddenInput = e.target.querySelector('.hidden-file-input');
+    
+    if (selectOption === selectOptionList[1] && !hiddenInput.files[0]) { // no audio file
+      return;
+    }
+    addWidget();
+  }
 
   return (
     <>
@@ -22,14 +32,16 @@ function ContentsInfoModal({onClick, selectOptionList, selectOption}) {
           )}
         </StyledToolbar>
       </EditorHeader>
-      <ul>
-        <InstInfoContainer />
-        {selectOption === selectOptionList[0] && <LinkInfoContainer />}
-        {selectOption === selectOptionList[1] && <AudioInfoContainer />}
-      </ul>
-      <EditorSubmitContainer />
+      <form onSubmit={(e) => {onSubmit(e)}}>
+        <ul>
+          <InstInfoContainer />
+          {selectOption === selectOptionList[0] && <LinkInfoContainer />}
+          {selectOption === selectOptionList[1] && <AudioInfoContainer />}
+        </ul>
+        <EditorSubmitContainer isFilledAllInputs={1}/>
+      </form>
     </>
   )
 };
 
-export default ContentsInfoModal;
+export default ContentsInfoContainer;
