@@ -147,7 +147,7 @@ function LinkInfoContainer() {
   )
 }
 
-function ContentsUploadContainer({optionName}) {
+function WidgetInfoUploadContainer({optionName}) {
   return (
     <>
       {optionName === 'audio' && <AudioInfoContainer />}
@@ -179,6 +179,74 @@ function EditorSubmitContainer() {
     </div>
   )
 }
+function PhotoContainer() {
+  return (
+    <div style={{
+      flex: '0.5 0 0px', 
+      backgroundColor: 'rgb(247, 248, 250)', 
+      marginRight: '10px',
+    }}>
+      <button type="button" style={{
+        margin: '0px',
+        height: '500px',
+        border: 'none',
+        background: 'none',
+        font: 'inherit',
+        display: 'block',
+        position: 'relative',
+        width: '100%',
+        transition: 'opacity 0.1s ease 0s',
+        borderRadius: '4px',
+        boxSizing: 'border-box',
+      }}>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="currentColor" preserveAspectRatio="xMidYMid meet">
+          <path d="M11.952 9.778l2.397-5.994A1.778 1.778 0 0 1 16 2.667h16c.727 0 1.38.442 1.65 1.117l2.398 5.994h10.174c.982 0 1.778.796 1.778 1.778v32c0 .981-.796 1.777-1.778 1.777H1.778A1.778 1.778 0 0 1 0 43.556v-32c0-.982.796-1.778 1.778-1.778h10.174zM24 38c6.075 0 11-4.925 11-11s-4.925-11-11-11-11 4.925-11 11 4.925 11 11 11z" />
+        </svg>
+        <span style={{display:'block', marginTop: '10px'}}>
+          사진 올리기
+        </span>
+        <HiddenFileInput />
+      </button>
+    </div> 
+  )
+}
+
+function PhotoInfoContainer() {
+  return (
+    // <>
+    <div style={{flex: '0.5 0 0px', minWidth: '400px'}}>
+      <label htmlFor="editor-title-input" style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        textAlign: 'left',
+        width: '300px',
+        lineHeight: '26px',
+        fontWeight: '600',
+        marginBottom: '20px',
+      }}>
+        제목
+      <input id="editor-title-input" name="title-input" style={{flex: '0 0 250px', width: '80%', height: '30px', fontSize:'15px', resize: 'none',  border:'1px solid #bbbbbb', borderRadius:'5px'}}
+      placeholder="작성하실 글의 제목을 적어주세요."
+      />
+      </label>
+      <div>
+        <textarea style={{width: '400px', height: '300px', fontSize: '15px', resize: 'none', border:'1px solid #bbbbbb', borderRadius: '5px'}}
+          placeholder="사진에 대한 설명을 적어주세요."/>
+      </div>
+    </div>
+  )
+}
+
+function ContentsUploadContainer() {
+  return (
+   <div style={{display: 'flex', minWidth: '1200px'}}>
+      <PhotoContainer />
+      <PhotoInfoContainer />
+    </div> 
+  )
+}
 
 function Editor() {
 
@@ -191,54 +259,7 @@ function Editor() {
   return (
     <>
     {/* 콘텐츠를 위한 사진 업로드 */}
-    <button  type="button" style={{
-      margin: '0px',
-      height: '500px',
-      // padding: '0px 0px 60%',
-      border: 'none',
-      background: 'none',
-      font: 'inherit',
-      display: 'block',
-      position: 'relative',
-      width: '100%',
-      transition: 'opacity 0.1s ease 0s',
-      borderRadius: '4px',
-      boxSizing: 'border-box',
-
-    }}>
-      <div style={{width: '100%', height: '100%', display: 'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', backgroundColor: 'rgb(247, 248, 250)'}}>
-        <svg width="48" height="48" viewBox="0 0 48 48"
-         fill="currentColor" preserveAspectRatio="xMidYMid meet">
-           <path d="M11.952 9.778l2.397-5.994A1.778 1.778 0 0 1 16 2.667h16c.727 0 1.38.442 1.65 1.117l2.398 5.994h10.174c.982 0 1.778.796 1.778 1.778v32c0 .981-.796 1.777-1.778 1.777H1.778A1.778 1.778 0 0 1 0 43.556v-32c0-.982.796-1.778 1.778-1.778h10.174zM24 38c6.075 0 11-4.925 11-11s-4.925-11-11-11-11 4.925-11 11 4.925 11 11 11z"></path>
-           </svg>
-           <span style={{display:'block', marginTop: '10px'}}>
-             사진 올리기
-           </span>
-           <HiddenFileInput />
-        </div>
-      </button>
-
-    <div style={{padding: '20px', display:'flex',alignItems:'center'}}>
-      <label htmlFor="editor-title-input" style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        textAlign: 'left',
-        width: '400px',
-        lineHeight: '26px',
-        fontWeight: '600',
-      }}>
-        제목
-      <input id="editor-title-input" name="title-input" style={{flex: '0 0 350px', width: '80%', height: '30px', fontSize:'15px', resize: 'none',  border:'1px solid #bbbbbb', borderRadius:'5px'}}
-      placeholder="작성하실 글의 제목을 적어주세요."
-      />
-      </label>
-    </div>
-    <div>
-      <textarea style={{width: '100%', height: '100px', fontSize: '15px', resize: 'none', border:'1px solid #bbbbbb', borderRadius: '5px'}}
-        placeholder="사진에 대한 설명을 적어주세요."/>
-    </div>
+    <ContentsUploadContainer />
     {/* 위젯 편집 기능 TODO: 모달 등 다른 형태로 분리 예정 */}
     <StyledEditorContainer>
       <EditorHeader>
@@ -249,8 +270,8 @@ function Editor() {
       </EditorHeader>
       <ul>
         <InstInfoContainer />
-        {currentOption === link && <ContentsUploadContainer optionName={link}/>}
-        {currentOption === audio && <ContentsUploadContainer optionName={audio}/>}
+        {currentOption === link && <WidgetInfoUploadContainer optionName={link}/>}
+        {currentOption === audio && <WidgetInfoUploadContainer optionName={audio}/>}
       </ul>
       <EditorSubmitContainer />
     </StyledEditorContainer>

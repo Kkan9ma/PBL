@@ -3,7 +3,7 @@ import Editor from './Editor';
 
 function Main() {
   return (
-    <main>
+    <main style={{padding: '30px'}}>
       <Editor/>
     </main>
   )
