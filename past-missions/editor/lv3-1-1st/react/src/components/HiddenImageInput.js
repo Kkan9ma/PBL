@@ -27,7 +27,10 @@ export default function HiddenImageInput() {
       onClick={(event) => {
         event.stopPropagation();
       }}
-      onChange={onUploadImage}
+      onChange={(e) => {
+        onUploadImage(e)
+        e.target.value = null;
+      }}
     />
   )
 }

@@ -42,13 +42,16 @@ const onMediaCommand = (event) => {
 
   const button = event.target.closest('button') ?? $('button', event.target);
   const { command } = button.dataset;
-  const handler = {
-    'fontColor': handleClickFontColor(event),
-    'uploadImage': handleClickImageUpload(event),
-    'default': () => {console.log('Error: Input wrong command.')}
-  };
 
-  handler[command];
+  if (command === 'fontColor') {
+    handleClickFontColor(event);
+    return;
+  }
+
+  if (command === 'uploadImage') {
+    handleClickImageUpload(event);
+    return;
+  } 
 }
 
 function ToolbarArea({ commandsList }) {
